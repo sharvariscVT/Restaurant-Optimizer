@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Sharvari Chougule  
+Copyright © 2019 Sharvari Chougule. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- This page displays all the users from the Database HealthSurveysDB -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Users List"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:95%">
+
+                <h1>List of All Users</h1>
+
+                <h:form id="UsersListForm">
+
+                    <p:panel header="List of All Users">
+
+                        <p:dataTable id="datalist" value="#{userController.allUsers}" var="item"
+                                     selectionMode="single" selection="#{userController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="5,10,20,30,40,50"
+                                     class="dataTable">
+
+                            <p:ajax event="rowSelect"   update="viewButton"/>
+                            <p:ajax event="rowUnselect" update="viewButton"/>
+
+                            
+                              <!--
+                            ********************************
+                            *       User Photo column      *
+                            ********************************
+                            -->
+                            <p:column headerText="User Photo" style="text-align:center; width:60px;">
+                                <!-- 
+                                Display the user's photo in a small circle. The cache="false" option
+                                enables immediate display of a newly uploaded photo without using cache.
+                                -->
+                                <p:graphicImage cache="false" class="smallProfilePhoto" value="#{userController.userPhoto(item.id)}" />
+                            </p:column>
+
+                            
+                            <!--
+                            ********************************
+                            *    First Name    *
+                            ********************************
+                            -->
+                            <p:column headerText="#{bundle.ListUserTitle_firstName}" style="text-align:left; width:300px;">
+                                <h:outputText value="#{item.firstName}"/>
+                            </p:column>
+
+                            <!--
+                            ********************************
+                            *      Last Name       *
+                            ********************************
+                            -->
+                            <p:column sortBy="#{item.lastName}" headerText="Last Name" style="text-align:left; width:300px;">
+                                <h:outputText value="#{item.lastName}">
+                                </h:outputText>
+                            </p:column>
+
+                           <!--
+                            ********************************
+                            *      UserName     *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column sortBy="#{item.username}" headerText="UseName" style="text-align:left; width:300px;">
+                                <h:outputText value="#{item.username}">
+                                </h:outputText>
+                            </p:column>
+
+                            <!--
+                            ********************************
+                            *           Footer             *
+                            ********************************
+                            -->
+                            <f:facet name="footer">
+                                <!-- 
+                                ===========
+                                VIEW Button
+                                ===========
+                                -->
+                                <p:commandButton id="viewButton" icon="fas fa-eye" value="View" 
+                                                 update=":UsersDetailDlg" oncomplete="PF('UsersDetailDialog').show()" 
+                                                 disabled="#{empty userController.selected}"/>
+                                &nbsp;
+                                
+                                
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </div>
+            <ui:include src="/userAccount/UserDetails.xhtml"/>
+
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>

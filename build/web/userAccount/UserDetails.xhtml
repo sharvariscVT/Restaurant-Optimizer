@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Sharvari Chougule 
+Copyright © 2019 Sharvari Chougule. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        
+       <!-- User's Details Form  -->
+        <p:dialog id="UsersDetailDlg" widgetVar="UsersDetailDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{userController.selected.firstName}  #{userController.selected.lastName}">
+
+            <h:form id="UserDetailForm" class="ui-datatable-data">
+                <div align="center">
+                   <h:panelGroup id="display">
+                       <h1>#{userController.selected.firstName}  #{userController.selected.lastName}</h1>
+                  
+                       <h:graphicImage value="#{userController.userPhoto(userController.selected.id)}" 
+                                        class="profilePhoto"/>
+                       <br /><br />
+                       <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" 
+                                     rendered="#{userController.selected != null}">
+                           
+                            <h:outputText value="#{bundle.ViewUserLabel_firstName}"/>
+                            <h:outputText value="#{userController.selected.firstName}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_middleName}"/>
+                            <h:outputText value="#{userController.selected.middleName}" />
+                            
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_lastName}"/>
+                            <h:outputText value="#{userController.selected.lastName}" />
+                            
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_address1}"/>
+                            <h:outputText value="#{userController.selected.address1}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_address2}"/>
+                            <h:outputText value="#{userController.selected.address2}" /> 
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_city}"/>
+                            <h:outputText value="#{userController.selected.city}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_state}"/>
+                            <h:outputText value="#{userController.selected.state}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_zipcode}"/>
+                            <h:outputText value="#{userController.selected.zipcode}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserLabel_email}"/>
+                            <h:outputText value="#{userController.selected.email}" />
+                            
+                            <h:outputText value="#{bundle.ViewUserTitle_username}"/>
+                            <h:outputText value="#{userController.selected.username}" />
+                            
+                       </p:panelGrid>
+                   </h:panelGroup>
+                    
+                      <br />
+                    <h:panelGroup>
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="UsersDetailDialog.hide()" 
+                                         icon="fas fa-window-close" />
+                    </h:panelGroup>
+                </div>
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+</html>

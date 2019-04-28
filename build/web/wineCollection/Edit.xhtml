@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WineCollectionEditDlg" widgetVar="WineCollectionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditWineCollectionTitle}">
+            <h:form id="WineCollectionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{wineCollectionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{wineCollectionController.selected.id}" title="#{bundle.EditWineCollectionTitle_id}" required="true" requiredMessage="#{bundle.EditWineCollectionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_wineName}" for="wineName" />
+                        <p:inputText id="wineName" value="#{wineCollectionController.selected.wineName}" title="#{bundle.EditWineCollectionTitle_wineName}" required="true" requiredMessage="#{bundle.EditWineCollectionRequiredMessage_wineName}"/>
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_yearofManufacture}" for="yearofManufacture" />
+                        <p:inputText id="yearofManufacture" value="#{wineCollectionController.selected.yearofManufacture}" title="#{bundle.EditWineCollectionTitle_yearofManufacture}" />
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_country}" for="country" />
+                        <p:inputText id="country" value="#{wineCollectionController.selected.country}" title="#{bundle.EditWineCollectionTitle_country}" />
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{wineCollectionController.selected.description}" title="#{bundle.EditWineCollectionTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_glassprice}" for="glassprice" />
+                        <p:inputText id="glassprice" value="#{wineCollectionController.selected.glassprice}" title="#{bundle.EditWineCollectionTitle_glassprice}" />
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_bottleprice}" for="bottleprice" />
+                        <p:inputText id="bottleprice" value="#{wineCollectionController.selected.bottleprice}" title="#{bundle.EditWineCollectionTitle_bottleprice}" required="true" requiredMessage="#{bundle.EditWineCollectionRequiredMessage_bottleprice}"/>
+                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_winetype}" for="winetype" />
+                        <p:inputText id="winetype" value="#{wineCollectionController.selected.winetype}" title="#{bundle.EditWineCollectionTitle_winetype}" required="true" requiredMessage="#{bundle.EditWineCollectionRequiredMessage_winetype}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{wineCollectionController.update}" value="#{bundle.Save}" update="display,:WineCollectionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'WineCollectionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WineCollectionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

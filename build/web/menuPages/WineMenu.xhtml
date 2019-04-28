@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Sharvari Chougule on 2018.06.24
+Copyright © 2018 Sharvari Chougule. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    
+        <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Wine Menu"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            
+                 <h:form id="WineForm" class="ui-datatable-data">
+                     <p:dataGrid var="wines" value="#{menuController.wineCollection}" 
+                             paginator="true" layout="grid"  
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                             rowsPerPageTemplate="6,12,16" columns="1" rows="12">
+                    <p:panel><table style="width:95%; margin:0 auto;">
+                         <tr>
+                             <td width="100px"><h:graphicImage value="#{menuController.winPhotoStoragePath()}#{menuController.selected.wineName}.png"
+                                            style="width:100px" /> </td>   
+                             <td width="100px"><table><tr><td>#{wines.wineName}</td></tr>
+                                     <tr><td></td></tr>
+                                     <tr><td></td></tr></table></td>
+                             <td>
+                                 
+                                     <h:outputText styleClass="fas fa-info-circle fa-2x" style="margin:0 auto; align-self: flex-end" />
+                                             
+                               </td>                                
+                                
+                         </tr>
+                     </table>
+                     
+                    </p:panel>   
+                </p:dataGrid>
+                       
+     
+    <!-- Dialog box that displays the information about selected recipe  -->            
+             
+<!--     <p:dialog header="Searched Recipe Details" id="recipeDetail" widgetVar="recipeDialog" modal="true" style="text-align:center"
+                          showEffect="slide" hideEffect="explode" resizable="false"  width="500" height="500">
+                    <p:outputPanel  style="text-align:center;"> 
+                         <h:panelGrid  columns="0" rendered="{not empty recipeSearchController.selectedRec}" columnClasses="centered"
+                                       styleClass="ui-panelgrid" cellpadding="10" style="border: 2px solid black"> 
+                           
+                     
+                          <a href="#{recipeSearchController.selectedRec.sourceUrl}" target="_blank"> 
+                              <img src="#{recipeSearchController.selectedRec.imageUrl}"  
+                          style="align-content: center"/></a>
+                     
+                           <br/> <br/>
+                           
+                           <h:outputText value="#{recipeSearchController.selectedRec.label}" style="font-size:15px" />
+                           <br/><br/>
+
+                    <table  style="align-items: center;border-spacing: 0px;" align="center" >
+                      <tr>
+                          <td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0; " align="center">
+                              <h:outputText value="Recipe Source Name" /></td>
+                          </tr>
+                       <br /><br />
+                       <tr ><td style="border: 1.5px solid black ;border-bottom:none;height:30px; width:400px; background-color:white " align="center">
+                              <a href="#{recipeSearchController.selectedRec.sourceUrl}" style="color:blue"  target="_blank">
+                                  <h:outputText value="#{recipeSearchController.selectedRec.sourceName}"  />
+                              </a>
+                           </td></tr>
+                       <br /><br />
+                       <tr><td style="border: 1.5px solid black; border-bottom:none; width:400px ;height:30px; background-color: #c0c0c0" align="center">
+                              <h:outputText value="Recipe Diet Labels" />
+                           </td></tr>
+                       <br /><br />
+                       <tr ><td style="border: 1.5px solid black ;border-bottom:none;height:30px; width:400px; background-color:white " align="center">
+                               <h:outputText value="#{recipeSearchController.selectedRec.dietLabel}" />
+                           </td></tr>
+                        <br /><br />
+                        <tr ><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0" align="center">
+                               <h:outputText value="Recipe Health Label" />
+                            </td> </tr>
+                        <br /><br />
+                          <tr><td style="border: 1.5px solid black ;border-bottom:none;height:30px ; width:400px; background-color:white " align="center">
+                              <h:outputText value="#{recipeSearchController.selectedRec.healthLabel}" />
+                         </td> </tr>
+                        <br /><br />
+                        <tr ><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0 "  align="center">
+                               <h:outputText value="Ingredient Lines" />
+                        </td> </tr>
+                           <br /><br/>
+                           <tr><td style="border: 1.5px solid black ;border-bottom:none;height:30px ; width:400px; background-color:white "  align="center">
+                                <h:outputText value="#{recipeSearchController.selectedRec.ingredientLines}" />
+                       </td> </tr>
+                           <br /><br />
+                           <tr><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color:#c0c0c0"  align="center">
+                                 <h:outputText value="Calories" />
+                            </td> </tr>
+                          <br /><br />
+                          <tr><td style="border: 1.5px solid black ;width:400px ; height:30px; background-color:white"  align="center">
+                                 <h:outputText value="#{recipeSearchController.selectedRec.caolries}" />
+                              </td></tr>
+                   
+                       </table>
+                         CLOSE button 
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('recipeDialog').hide()" icon="fas fa-window-close"/>
+                    
+            </h:panelGrid> 
+                                 
+        </p:outputPanel>  
+       
+    </p:dialog>-->
+                
+            </h:form> 
+     
+           
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
