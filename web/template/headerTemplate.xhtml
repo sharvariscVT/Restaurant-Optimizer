@@ -46,20 +46,26 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     Column 2 (Center): Unused
                     *************************
                     -->
-                    <td text-align="center" valign="middle">
-                       <p:menubar>
-                            <p:submenu label="Menu" icon='fas fa-utensils' >
+                    <td>
+                       <p:menubar style="width:100%;">
+                           <p:separator id="customSeparator" style="width:60px;" />
+                            <p:submenu label="Menu" icon='fas fa-utensils' styleClass="menubar">
                                     <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" />
                                     <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
                             </p:submenu>
-                           <p:menuitem value="About" url="#" icon='fas fa-info-circle'/>       
-                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle'/>
-                           <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square'/>
-                           <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar'/>
+                           <p:separator id="customSeparator1" style="width:55px;clear: none;" />
+                           <p:menuitem value="About" url="#" icon='fas fa-info-circle'/> 
+                           <p:separator id="customSeparator2" style="width:55px;clear: none;" />
+                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle' />
+                           <p:separator id="customSeparator3" style="width:55px;clear: none;" />
+                           <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square' />
+                           <p:separator id="customSeparator4" style="width:55px;clear: none;" />
+                           <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar' />
+                           <p:separator id="customSeparator5" style="width:55px;clear: none;" />
                             
                          <c:choose>
                             <c:when test="#{userController.isLoggedIn() == false}">
-                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fa fa-sign-in'>
+                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fa fa-sign-in-alt'>
                                </p:menuitem></c:when>
                             <c:otherwise test="userController.isLoggedIn() == false">
                                 <c:choose>
