@@ -58,9 +58,9 @@ Copyright © 2019 Sharvari Chougule. All rights reserved.
                                     |   Generate Report Link       |
                                     ================================
                                     -->
-                                   <h:link  outcome="/menuPages/createWineMenu" class="standardText" >
+                                    <h:commandLink  action="/menuPages/createWineMenu" class="standardText" actionListener="#{wineCollectionController.prepareCreate()}">
                                             <i class="fas fa-file-alt"></i>&nbsp;Create Wine/Menu Entry
-                                   </h:link>
+                                    </h:commandLink>
                                 </li>
 
                                 <li class="verticalMenuItem">
