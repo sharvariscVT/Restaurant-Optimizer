@@ -8,7 +8,8 @@ Copyright © 2018 Osman Balci. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!--
     *********************************************
@@ -46,37 +47,41 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     *************************
                     -->
                     <td text-align="center" valign="middle">
-                   
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Menu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;History</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Wines</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                      <h:link outcome="/menuPages/WineMenu" style="color:black" onclick="#{menuController.showWineCollection()}">
-                            &nbsp;Wine Menu
-                        </h:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Book a Table</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Events this Week</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                       <h:link outcome="/SignIn" style="color:black">
-                            &nbsp;Sign In
-                        </h:link>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <p:menubar>
+                            <p:submenu label="Menu" icon='fas fa-utensils' >
+                                    <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" />
+                                    <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
+                            </p:submenu>
+                           <p:menuitem value="About" url="#" icon='fas fa-info-circle'/>       
+                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle'/>
+                           <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square'/>
+                           <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar'/>
+                            
+                         <c:choose>
+                            <c:when test="#{userController.isLoggedIn() == false}">
+                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fa fa-sign-in'>
+                               </p:menuitem></c:when>
+                            <c:otherwise test="userController.isLoggedIn() == false">
+                                <c:choose>
+                                    <c:when test="#{userController.isAdministrator() == true}">
+                                         <p:menuitem outcome="/userAccount/AdminProfile" style="color:black" value="Admin's Account" icon='fa fa-smile-o'>
+                                        
+                                         </p:menuitem>
+                                    </c:when>
+                                    <c:otherwise test="#{userController.isAdministrator() == false}">
+                                         <p:menuitem outcome="/userAccount/Profile" style="color:black" value="My Account" icon='fa fa-smile-o'>
+                                           
+                                        </p:menuitem>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                       </p:menubar>
+                        
                 </td>
-                    <!--
-                    ***************************************
-                    Column 3 (Right): Hamburger Menu Button
-                    ***************************************
-                    -->
-                    <!--<p:menuButton value="Options" iconPos = "center" style="width:2120px;"> </p:menuButton>-->
-                    
+                                   
+                        
+
                     <td align="right" valign="middle">
                     <a class="social-roll" href="https://www.facebook.com/blacksburgwinelab/" target="_blank">
                         <img src="#{resource['images:socialMediaIcons/facebook.png']}" /></a>
@@ -92,10 +97,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     <div class="tcontainer">
                         <div class="ticker-wrap">
                             <div class="ticker-move">
-                              <!-- <div class="ticker-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <div class="ticker-item">Aliquam consequat varius consequat.</div>
-                            <div class="ticker-item">Fusce dapibus turpis vel nisi malesuada sollicitudin.</div>
-                        <div class="ticker-item">Pellentesque auctor molestie orci ut blandit.</div>-->
+                              
                            <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
                               <img src="#{resource['images:photo4.png']}" class="ticker-item"
                                  style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
@@ -117,5 +119,50 @@ Copyright © 2018 Osman Balci. All rights reserved.
 
     </ui:composition>
     <!-- Do not enter tags before the composition line since they are ignored by JSF -->
-
+<!--                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Menu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;History</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Wines</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <h:link outcome="/menuPages/WineMenu" style="color:black" onclick="#{menuController.showWineCollection()}">
+                            &nbsp;Wine Menu
+                        </h:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Book a Table</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Events this Week</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <c:choose>
+                            <c:when test="#{userController.isLoggedIn() == false}">
+                               <h:link outcome="/SignIn" style="color:black">
+                            &nbsp;Sign In
+                               </h:link></c:when>
+                            <c:otherwise test="userController.isLoggedIn() == false">
+                                <c:choose>
+                                    <c:when test="#{userController.isAdministrator() == true}">
+                                         <h:link outcome="/userAccount/AdminProfile" style="color:black">
+                                             &nbsp;Admin Account
+                                         </h:link>
+                                    </c:when>
+                                    <c:otherwise test="#{userController.isAdministrator() == false}">
+                                         <h:link outcome="/userAccount/Profile" style="color:black">
+                                            &nbsp;My Account
+                                        </h:link>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                    <!--
+                    ***************************************
+                    Column 3 (Right): Hamburger Menu Button
+                    ***************************************
+                    -->
+                    <!--<p:menuButton value="Options" iconPos = "center" style="width:2120px;"> </p:menuButton>-->
+                    
 </html>

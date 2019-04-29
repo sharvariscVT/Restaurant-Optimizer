@@ -61,7 +61,9 @@ public class WineCollectionController implements Serializable {
     public String winPhotoStoragePath() {
         return Constants.RELATIVE_STORAGE_PATH;
     }
-    
+    public String winePhotoStoragePath(){
+        return Constants.ABSOLUTE_STORAGE_PATH;
+    }
     
     public WineCollectionController() {
     }
@@ -116,8 +118,10 @@ public class WineCollectionController implements Serializable {
 
 
     public WineCollection prepareCreate() {
+        
+        setWineFileUploaded(false);
         selected = new WineCollection();
-        initializeEmbeddableKey();
+        
         return selected;
     }
 
@@ -161,7 +165,7 @@ public class WineCollectionController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
-            menuController.setWineFileUploaded(false);
+            setWineFileUploaded(false);
         }
     }
 
@@ -173,8 +177,10 @@ public class WineCollectionController implements Serializable {
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
+        
+          Methods.preserveMessages();
         if (selected != null) {
-            setEmbeddableKeys();
+          
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getWineFacade().edit(selected);

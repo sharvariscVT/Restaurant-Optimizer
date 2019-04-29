@@ -6,6 +6,7 @@ package edu.vt.managers;
 
 import edu.vt.globals.Constants;
 import edu.vt.controllers.MenuController;
+import edu.vt.controllers.WineCollectionController;
 import edu.vt.globals.Methods;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,6 +40,8 @@ public class FileUploadManager implements Serializable {
     @Inject
     private MenuController menuController;
 
+    @Inject
+    private WineCollectionController wineCollectionController;
     /*
     =========================
     Getter and Setter Methods
@@ -68,7 +71,7 @@ public class FileUploadManager implements Serializable {
         // Check if a file is selected
         if (file.getSize() == 0) {
             Methods.showMessage("Fatal Error", "No File Selected!", "Please choose a file first!");
-            menuController.setWineFileUploaded(false);
+            wineCollectionController.setWineFileUploaded(false);
             return "/menuPages/createWineMenu?faces-redirect=true";
         }
 
@@ -118,7 +121,7 @@ public class FileUploadManager implements Serializable {
         storeWineFile(file);
 
         // Settings
-        menuController.setWineFileUploaded(true);
+        wineCollectionController.setWineFileUploaded(true);
 
         // Redirect to show the Create page
         return "/menuPages/createWineMenu?faces-redirect=true";
@@ -143,7 +146,7 @@ public class FileUploadManager implements Serializable {
             inputStream = file.getInputstream();
 
             // Set the company's logo file name to company's stock symbol (ticker).png
-            String wineFileName = menuController.getSelected().getWineName() + ".png";
+            String wineFileName = wineCollectionController.getSelected().getWineName() + ".png";
 
             /*
             Write the uploaded file's input stream of bytes into the file named
@@ -155,7 +158,7 @@ public class FileUploadManager implements Serializable {
             // Close the input stream and release any system resources associated with it
             inputStream.close();
             
-            Methods.showMessage("Information", "Success!", "Logo File Successfully Uploaded!");
+            Methods.showMessage("Information", "Success!", "Wine File Successfully Uploaded!");
 
         } catch (IOException ex) {
             Methods.showMessage("Fatal Error", "Something went wrong while writing the uploaded logo file!",

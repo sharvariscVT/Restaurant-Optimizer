@@ -21,17 +21,17 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
 
         <!-- Create the content for this page below -->
         <ui:define name="editableContent">
-            
-                 <h:form id="WineForm" class="ui-datatable-data">
+            <div align="center">
+                 <h:form id="WineForm" class="ui-datatable-data" style="width:80%; ">
                      <p:dataGrid var="wines" value="#{menuController.wineCollection}" 
                              paginator="true" layout="grid"  
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                              rowsPerPageTemplate="6,12,16" columns="1" rows="12">
-                    <p:panel><table style="width:95%; margin:0 auto;">
-                         <tr>
-                             <td width="100px"><h:graphicImage value="#{menuController.winPhotoStoragePath()}#{menuController.selected.wineName}.png"
-                                            style="width:100px" /> </td>   
-                             <td width="100px"><table><tr><td>#{wines.wineName}</td></tr>
+                    <p:panel><table style="width:95%; margin:0 auto; align-content: center">
+                            <tr >
+                             <td width="200px"><h:graphicImage value="#{wineCollectionController.winePhotoStoragePath()}#{wines.wineName}.png"
+                                            width="100px" height="300px"  /> </td>   
+                             <td width="400px" align="center"><table><tr><td>#{wines.wineName}</td></tr>
                                      <tr><td></td></tr>
                                      <tr><td></td></tr></table></td>
                              <td>
@@ -121,7 +121,7 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                 
             </h:form> 
      
-           
+            </div>   
         </ui:define>
 
     </ui:composition>

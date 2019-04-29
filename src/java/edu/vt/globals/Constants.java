@@ -43,7 +43,7 @@ public final class Constants {
 
     
     
-    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/Chougule/DocRoot";
+    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/Chougule/DocRoot/WineStorage/";
 
     public static final String RELATIVE_STORAGE_PATH = "/WineStorage/";
     /*

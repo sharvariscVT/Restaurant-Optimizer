@@ -47,16 +47,87 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     *************************
                     -->
                     <td text-align="center" valign="middle">
-                   
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <p:menubar>
+                            <p:submenu label="Menu" icon='fas fa-utensils' >
+                                    <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" />
+                                    <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
+                            </p:submenu>
+                           <p:menuitem value="About" url="#" icon='fas fa-info-circle'/>       
+                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle'/>
+                           <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square'/>
+                           <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar'/>
+                            
+                         <c:choose>
+                            <c:when test="#{userController.isLoggedIn() == false}">
+                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fa fa-sign-in'>
+                               </p:menuitem></c:when>
+                            <c:otherwise test="userController.isLoggedIn() == false">
+                                <c:choose>
+                                    <c:when test="#{userController.isAdministrator() == true}">
+                                         <p:menuitem outcome="/userAccount/AdminProfile" style="color:black" value="Admin's Account" icon='fa fa-smile-o'>
+                                        
+                                         </p:menuitem>
+                                    </c:when>
+                                    <c:otherwise test="#{userController.isAdministrator() == false}">
+                                         <p:menuitem outcome="/userAccount/Profile" style="color:black" value="My Account" icon='fa fa-smile-o'>
+                                           
+                                        </p:menuitem>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                       </p:menubar>
+                        
+                </td>
+                                   
+                        
+
+                    <td align="right" valign="middle">
+                    <a class="social-roll" href="https://www.facebook.com/blacksburgwinelab/" target="_blank">
+                        <img src="#{resource['images:socialMediaIcons/facebook.png']}" /></a>
+                    <a class="social-roll" href="https://twitter.com/virginia_tech" target="_blank">
+                        <img src="#{resource['images:socialMediaIcons/twitter.png']}" /></a>
+                    <a class="social-roll" href="https://www.linkedin.com/school/virginia-tech" target="_blank">
+                        <img src="#{resource['images:socialMediaIcons/linkedIn.png']}" /></a>
+                  
+                </td>
+                    
+                </tr>
+                <tr>
+                    <div class="tcontainer">
+                        <div class="ticker-wrap">
+                            <div class="ticker-move">
+                              
+                           <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
+                              <img src="#{resource['images:photo4.png']}" class="ticker-item"
+                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
+                                 alt="Companies Logo1" /></a>
+                              <img src="#{resource['images:photo5.png']}" class="ticker-item"
+                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
+                                 alt="Companies Logo2" />
+                              <img src="#{resource['images:photo6.png']}" class="ticker-item"
+                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
+                                 alt="Companies Logo3" />
+                           </div>
+                        </div>
+                    </div>
+                </tr>
+                
+            </table>
+
+        </h:form>
+
+    </ui:composition>
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+<!--                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="http://fortune.com/best-companies/" target="_blank">
                         &nbsp;Menu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="http://fortune.com/best-companies/" target="_blank">
                         &nbsp;About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="http://fortune.com/best-companies/" target="_blank">
                         &nbsp;History</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                        <a href="http://fortune.com/best-companies/" target="_blank">
-                        &nbsp;Wines</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <a href="http://fortune.com/best-companies/" target="_blank">
+                        &nbsp;Wines</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <h:link outcome="/menuPages/WineMenu" style="color:black" onclick="#{menuController.showWineCollection()}">
                             &nbsp;Wine Menu
                         </h:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,8 +157,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 </c:choose>
                             </c:otherwise>
                         </c:choose>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </td>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                     <!--
                     ***************************************
                     Column 3 (Right): Hamburger Menu Button
@@ -95,45 +165,4 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     -->
                     <!--<p:menuButton value="Options" iconPos = "center" style="width:2120px;"> </p:menuButton>-->
                     
-                    <td align="right" valign="middle">
-                    <a class="social-roll" href="https://www.facebook.com/blacksburgwinelab/" target="_blank">
-                        <img src="#{resource['images:socialMediaIcons/facebook.png']}" /></a>
-                    <a class="social-roll" href="https://twitter.com/virginia_tech" target="_blank">
-                        <img src="#{resource['images:socialMediaIcons/twitter.png']}" /></a>
-                    <a class="social-roll" href="https://www.linkedin.com/school/virginia-tech" target="_blank">
-                        <img src="#{resource['images:socialMediaIcons/linkedIn.png']}" /></a>
-                  
-                </td>
-                    
-                </tr>
-                <tr>
-                    <div class="tcontainer">
-                        <div class="ticker-wrap">
-                            <div class="ticker-move">
-                              <!-- <div class="ticker-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <div class="ticker-item">Aliquam consequat varius consequat.</div>
-                            <div class="ticker-item">Fusce dapibus turpis vel nisi malesuada sollicitudin.</div>
-                        <div class="ticker-item">Pellentesque auctor molestie orci ut blandit.</div>-->
-                           <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
-                              <img src="#{resource['images:photo4.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo1" /></a>
-                              <img src="#{resource['images:photo5.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo2" />
-                              <img src="#{resource['images:photo6.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo3" />
-                           </div>
-                        </div>
-                    </div>
-                </tr>
-                
-            </table>
-
-        </h:form>
-
-    </ui:composition>
-    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
-
 </html>

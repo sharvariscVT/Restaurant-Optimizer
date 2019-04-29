@@ -3,19 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/userAccount/Profile.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/globals/Methods.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/managers/FileUploadManager.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/UploadFile.xhtml</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/userAccount/AdminProfile.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/UserController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/index.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/MenuPhotoController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/UserPhotoController.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/MenuController.java</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/globals/Constants.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/util/JsfUtil.java</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/createWineMenu.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/css/siteStyles.css</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/WineCollectionController.java</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/template/headerTemplate.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/SignIn.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/Bundle.properties</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/WineMenu.xhtml</file>
         </group>
     </open-files>
