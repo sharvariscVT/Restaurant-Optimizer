@@ -8,7 +8,8 @@ Copyright © 2018 Osman Balci. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!--
     *********************************************
@@ -65,9 +66,26 @@ Copyright © 2018 Osman Balci. All rights reserved.
                         &nbsp;Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="http://fortune.com/best-companies/" target="_blank">
                         &nbsp;Events this Week</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                       <h:link outcome="/SignIn" style="color:black">
+                        <c:choose>
+                            <c:when test="#{userController.isLoggedIn() == false}">
+                               <h:link outcome="/SignIn" style="color:black">
                             &nbsp;Sign In
-                        </h:link>
+                               </h:link></c:when>
+                            <c:otherwise test="userController.isLoggedIn() == false">
+                                <c:choose>
+                                    <c:when test="#{userController.isAdministrator() == true}">
+                                         <h:link outcome="/userAccount/AdminProfile" style="color:black">
+                                             &nbsp;Admin Account
+                                         </h:link>
+                                    </c:when>
+                                    <c:otherwise test="#{userController.isAdministrator() == false}">
+                                         <h:link outcome="/userAccount/Profile" style="color:black">
+                                            &nbsp;My Account
+                                        </h:link>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                     <!--
