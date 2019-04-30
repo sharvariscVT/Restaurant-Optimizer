@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Ashish Kotian on 2019.04.20
+Copyright © 2019 Ashish Kotian. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Contact Us"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center" width="100%">
+                <br></br><br></br>
+                <h1><font size="+2">Contact Us</font></h1>
+                <br /><br></br>
+
+                <h:form>
+                    <p:panelGrid columns="2" style="width: 520px; height: 150px" columnClasses="panelGridColumn1, panelGridColumn2">
+                        
+                        <h align ="center"> Contact1 :</h>
+                        
+                        <h:outputLabel value="John Boyer" for="username" style="align-content: left"/>
+                        <h:outputLabel value="Contact2 :" for="password" />
+                        <h:outputLabel value="Katie Pritchard" for="username" style="align-content: left"/>
+                        <h:outputLabel value="Email us at :" for="email" style="align-content: left"/>
+                        <h:outputLabel value="info@blacksburgwinelab.com" for="username" style="align-content: left"/>
+                        <h:outputLabel value="Call us at :" for="username" style="align-content: left"/>
+                        <h:outputLabel value="540-605-7291" for="username" style="align-content: left"/>
+                        <h:outputLabel value="Find us at :" for="username" style="align-content: left"/>
+                        <h:outputLabel value="400 Turner St NW,  Suite 101,  Blacksburg VA - 24060" for="username" style="align-content: left"/>
+                        
+                    </p:panelGrid>
+                    </h:form>
+                    <br/>
+                    <br/>
+                    
+            </div>
+            <br/><br/><br/>
+        </ui:define>
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
