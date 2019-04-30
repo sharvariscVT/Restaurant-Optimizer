@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Osman Balci on 2018.06.18
+Copyright © 2018 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="Search Results">
+            <!-- Set the page title -->
+            <h:outputText value="Search Results"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:97%">
+
+                <h:form id="WineListForm">
+
+                    <!-- The search results are displayed under p:panel -->
+                    <p:panel header="Search Results">
+                        <!-- 
+                        The companyController.searchItems first grabs the inputs from Search.xhtml.
+                        Then companyController performs the search and returns applicable items here. 
+                        The returned items are displayed in this page as the search results.
+                        -->
+                        <p:dataTable id="datalist" value="#{wineCollectionController.getSearchItems()}" var="item"
+                                     selectionMode="single" selection="#{wineCollectionController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="5"
+                                     rowsPerPageTemplate="5,10,15,20,30,40,50"
+                                     class="dataTable" >
+                            <!--
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton "/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton "/>
+                            -->
+                            <!-- 
+                            ********************
+                            *   Company NAME   *
+                            ********************
+                            Clicking the column header redisplays the table as sorted w.r.t. company NAME  
+                            in alphabetical order A to Z. Clicking it again reverses the order to Z to A. 
+                            -->
+                            <p:column sortBy="#{item.WineName}" headerText="Name" style="width:120px;" >
+                                <div align="center">
+                                    <h:outputText class="standardText" value="#{item.WineName}"/>
+                                </div>
+                            </p:column>
+                            
+                            <p:column sortBy="#{item.Description}" headerText="Description" style="width:120px;" >
+                                   <div align="center">
+                                    <h:outputText class="standardText" value="#{item.Description}"/>
+                                </div>
+                            </p:column>
+
+                            
+
+                           
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+
+
+                
+            </div>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

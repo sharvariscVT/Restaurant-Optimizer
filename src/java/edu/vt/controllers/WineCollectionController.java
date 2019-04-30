@@ -31,10 +31,16 @@ import javax.inject.Inject;
 public class WineCollectionController implements Serializable {
 
     @EJB
-    private edu.vt.FacadeBeans.WineCollectionFacade ejbFacade;
+    private WineCollectionFacade wineCollectionFacade;
     private List<WineCollection> items = null;
     private WineCollection selected;
+    private List<WineCollection> searchItems = null;
+     // searchField refers to Wine Name or All
+    private String searchField;
 
+    // searchString contains the character string the user entered for searching the selected searchField
+    private String searchString;
+    
     @Inject 
     private WineCollectionFacade wineFacade;
     
@@ -75,6 +81,14 @@ public class WineCollectionController implements Serializable {
     public void setSelected(WineCollection selected) {
         this.selected = selected;
     }
+    
+    private WineCollectionFacade getWineCollectionFacade() {
+        return wineCollectionFacade;
+    }
+
+    public void setWineCollectionFacade(WineCollectionFacade wineCollectionFacade) {
+        this.wineCollectionFacade = wineCollectionFacade;
+    }
 
     protected void setEmbeddableKeys() {
     }
@@ -82,9 +96,7 @@ public class WineCollectionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private WineCollectionFacade getFacade() {
-        return ejbFacade;
-    }
+
      public String cancel() {
         // Unselect previously selected company if any
         selected = null;
@@ -176,6 +188,57 @@ public class WineCollectionController implements Serializable {
         return items;
     }
 
+    public String getSearchField() {
+        return searchField;
+    }
+
+    public void setSearchField(String searchField) {
+        this.searchField = searchField;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
+    
+    public List<WineCollection> getSearchItems() {
+        /*
+        =============================================================================================
+        You must construct and return the search results List "searchItems" ONLY IF the List is null. 
+        Any List provided to p:dataTable to display must be returned ONLY IF the List is null
+        ===> in order for the column-sort to work. <===
+        =============================================================================================
+         */
+        if (searchItems == null) {
+            switch (searchField) {
+                case "Title":
+                    // Return the list of object references of all those companies where 
+                    // company name contains the search string 'searchString' entered by the user.
+                    searchItems = getWineCollectionFacade().nameQuery(searchString);
+                    break;
+
+                default:
+                    // Return the list of object references of all those companies where company name,
+                    // ticker symbol, or sector name contains the search string 'searchString' entered by the user.
+                    searchItems = getWineCollectionFacade().allQuery(searchString);
+            }
+        }
+        return searchItems;
+    }
+    
+     public String search() {
+        // Unselect previously selected game if any before showing the search results
+        selected = null;
+
+        // Invalidate list of search items to trigger re-query.
+        searchItems = null;
+
+        return "/search/SearchResults?faces-redirect=true";
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         
           Methods.preserveMessages();
