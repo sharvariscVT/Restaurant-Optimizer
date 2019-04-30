@@ -82,7 +82,7 @@ Style the div component whose unique id is "header" per reference
 <div id="header"> in siteTemplate
 */
 #header {
-    background-color: powderblue;
+    background-color: maroon;
     width: 100%;
     height: 134px;
     position: absolute;
@@ -683,3 +683,11 @@ if content overflows an element's box.
    box-shadow: none; 
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  width: 800px;
+}
