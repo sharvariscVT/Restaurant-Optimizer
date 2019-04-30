@@ -50,7 +50,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                        <p:menubar style="width:100%;">
                            <p:separator id="customSeparator" style="width:60px;" />
                             <p:submenu label="Menu" icon='fas fa-utensils' styleClass="menubar">
-                                    <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" />
+                                    <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" style="align-content: center"/>
                                     <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
                             </p:submenu>
                            <p:separator id="customSeparator1" style="width:55px;clear: none;" />
@@ -58,8 +58,8 @@ Copyright © 2018 Osman Balci. All rights reserved.
                            <p:separator id="customSeparator2" style="width:55px;clear: none;" />
                            <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle' />
                            <p:separator id="customSeparator3" style="width:55px;clear: none;" />
-                           <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square' />
-                           <p:separator id="customSeparator4" style="width:55px;clear: none;" />
+                           <p:menuitem value="Contact Us" outcome="/Contact Us" icon='fas fa-phone-square' />
+                           <p:separator id="customSeparator4"  style="width:55px;clear: none;" />
                            <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar' />
                            <p:separator id="customSeparator5" style="width:55px;clear: none;" />
                             
@@ -105,15 +105,18 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             <div class="ticker-move">
                               
                            <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
-                              <img src="#{resource['images:photo4.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo1" /></a>
-                              <img src="#{resource['images:photo5.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo2" />
-                              <img src="#{resource['images:photo6.png']}" class="ticker-item"
-                                 style="width:100%; height:100%; max-height:64px; max-width:212px; border: none; padding-left: 10px"
-                                 alt="Companies Logo3" />
+                               <h class="ticker-item" style="color:white"><font size="+4" face="verdana">Free Pizza This Week</font></h>
+                                 </a>
+                              <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
+                               <h class="ticker-item" style="color:white"><font size="+4">Buy a glass of Wine, get one at half price</font></h>
+                                 </a>
+                              <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
+                               <h class="ticker-item" style="color:white"><font size="+4">All Wines half off this Thursday</font></h>
+                                 </a>
+                                
+                              <a  href="https://www.facebook.com/blacksburgwinelab/" target="_blank">   
+                               <h class="ticker-item" style="color:white"><font size="+4">Happy hours on Friday from 2pm to 7pm</font></h>
+                                 </a>
                            </div>
                         </div>
                     </div>
