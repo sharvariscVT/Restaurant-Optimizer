@@ -98,6 +98,7 @@ Style the div component whose unique id is "editableContent" per reference
 #editableContent {
     /* height = 100% window height - (header height 84px + footer height 100px) */
     height: calc(100% - 234px); 
+    
     width: 100%;
     left: 0px;
     right: 0px;
@@ -109,11 +110,12 @@ Style the div component whose unique id is "footer" per reference
 <div id="footer"> in siteTemplate
 */
 #footer {
-    height: 100px;
+    height: 100%;
     width: 100%;
     left: 0px;
     right: 0px;
     bottom: 0px;
+    background-color: maroon;
 }
 
 /*
@@ -187,11 +189,12 @@ margin-right: 20px !important;
   .tcontainer{
     width: 100%;
     overflow: hidden;
+    
   }
   .ticker-wrap {
     width: 100%;
     padding-left: 100%;
-    background-color: #eee;
+    background-color: maroon;
   }
   .ticker-move {
     display: inline-block;
@@ -200,7 +203,7 @@ margin-right: 20px !important;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-name: ticker;
-    animation-duration: 15s;
+    animation-duration: 17s;
   }
   .ticker-move:hover{
     animation-play-state: paused;
