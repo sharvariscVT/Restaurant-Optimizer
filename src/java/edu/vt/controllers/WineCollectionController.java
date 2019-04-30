@@ -214,7 +214,7 @@ public class WineCollectionController implements Serializable {
          */
         if (searchItems == null) {
             switch (searchField) {
-                case "Title":
+                case "WineName":
                     // Return the list of object references of all those companies where 
                     // company name contains the search string 'searchString' entered by the user.
                     searchItems = getWineCollectionFacade().nameQuery(searchString);
@@ -235,8 +235,9 @@ public class WineCollectionController implements Serializable {
 
         // Invalidate list of search items to trigger re-query.
         searchItems = null;
-
+        System.out.println(",,,,,,,,,,,,,,ChouguleDone");
         return "/search/SearchResults?faces-redirect=true";
+        
     }
     
     private void persist(PersistAction persistAction, String successMessage) {
