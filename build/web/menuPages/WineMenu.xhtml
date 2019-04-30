@@ -29,15 +29,19 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                              rowsPerPageTemplate="6,12,16" columns="1" rows="12">
                     <p:panel><table style="width:95%; margin:0 auto; align-content: center">
                             <tr >
-                             <td width="200px"><h:graphicImage value="#{wineCollectionController.winePhotoStoragePath()}#{wines.wineName}.png"
-                                            width="100px" height="300px"  /> </td>   
+                                <td width="200px" height="300px"><img value="#{wineCollectionController.winePhotoStoragePath()}#{wines.wineName}.png"
+                                            width="100px"   class="scalableImage"/> </td>   
                              <td width="400px" align="center"><table><tr><td>#{wines.wineName}</td></tr>
                                      <tr><td></td></tr>
                                      <tr><td></td></tr></table></td>
                              <td>
-                                 
+                                 <p:commandLink update=":WineForm:wineDetail" oncomplete="PF('wineDialog').show()" title="View Detail">
+                                   
                                      <h:outputText styleClass="fas fa-info-circle fa-2x" style="margin:0 auto; align-self: flex-end" />
-                                             
+                                                 
+                                   <f:setPropertyActionListener value="#{wines}" target="#{menuController.selected}" />
+                                                 
+                                 </p:commandLink>   
                                </td>                                
                                 
                          </tr>
@@ -49,75 +53,31 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
      
     <!-- Dialog box that displays the information about selected recipe  -->            
              
-<!--     <p:dialog header="Searched Recipe Details" id="recipeDetail" widgetVar="recipeDialog" modal="true" style="text-align:center"
+     <p:dialog header="Selected Wine Details" id="wineDetail" widgetVar="wineDialog" modal="true" style="text-align:center"
                           showEffect="slide" hideEffect="explode" resizable="false"  width="500" height="500">
                     <p:outputPanel  style="text-align:center;"> 
-                         <h:panelGrid  columns="0" rendered="{not empty recipeSearchController.selectedRec}" columnClasses="centered"
+                         <h:panelGrid  columns="0" rendered="{not empty menuController.selected}" columnClasses="centered"
                                        styleClass="ui-panelgrid" cellpadding="10" style="border: 2px solid black"> 
                            
                      
-                          <a href="#{recipeSearchController.selectedRec.sourceUrl}" target="_blank"> 
-                              <img src="#{recipeSearchController.selectedRec.imageUrl}"  
-                          style="align-content: center"/></a>
+                          
+                             <img src="#{wineCollectionController.winePhotoStoragePath()}#{menuController.selected.wineName}.png"  />
+                      
                      
                            <br/> <br/>
                            
-                           <h:outputText value="#{recipeSearchController.selectedRec.label}" style="font-size:15px" />
+                           <h:outputText value="#{menuController.selected.wineName} (#{menuController.selected.winetype})" style="font-size:15px" />
                            <br/><br/>
 
-                    <table  style="align-items: center;border-spacing: 0px;" align="center" >
-                      <tr>
-                          <td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0; " align="center">
-                              <h:outputText value="Recipe Source Name" /></td>
-                          </tr>
-                       <br /><br />
-                       <tr ><td style="border: 1.5px solid black ;border-bottom:none;height:30px; width:400px; background-color:white " align="center">
-                              <a href="#{recipeSearchController.selectedRec.sourceUrl}" style="color:blue"  target="_blank">
-                                  <h:outputText value="#{recipeSearchController.selectedRec.sourceName}"  />
-                              </a>
-                           </td></tr>
-                       <br /><br />
-                       <tr><td style="border: 1.5px solid black; border-bottom:none; width:400px ;height:30px; background-color: #c0c0c0" align="center">
-                              <h:outputText value="Recipe Diet Labels" />
-                           </td></tr>
-                       <br /><br />
-                       <tr ><td style="border: 1.5px solid black ;border-bottom:none;height:30px; width:400px; background-color:white " align="center">
-                               <h:outputText value="#{recipeSearchController.selectedRec.dietLabel}" />
-                           </td></tr>
-                        <br /><br />
-                        <tr ><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0" align="center">
-                               <h:outputText value="Recipe Health Label" />
-                            </td> </tr>
-                        <br /><br />
-                          <tr><td style="border: 1.5px solid black ;border-bottom:none;height:30px ; width:400px; background-color:white " align="center">
-                              <h:outputText value="#{recipeSearchController.selectedRec.healthLabel}" />
-                         </td> </tr>
-                        <br /><br />
-                        <tr ><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color: #c0c0c0 "  align="center">
-                               <h:outputText value="Ingredient Lines" />
-                        </td> </tr>
-                           <br /><br/>
-                           <tr><td style="border: 1.5px solid black ;border-bottom:none;height:30px ; width:400px; background-color:white "  align="center">
-                                <h:outputText value="#{recipeSearchController.selectedRec.ingredientLines}" />
-                       </td> </tr>
-                           <br /><br />
-                           <tr><td style="border: 1.5px solid black ;border-bottom:none;width:400px ;height:30px; background-color:#c0c0c0"  align="center">
-                                 <h:outputText value="Calories" />
-                            </td> </tr>
-                          <br /><br />
-                          <tr><td style="border: 1.5px solid black ;width:400px ; height:30px; background-color:white"  align="center">
-                                 <h:outputText value="#{recipeSearchController.selectedRec.caolries}" />
-                              </td></tr>
-                   
-                       </table>
-                         CLOSE button 
-                        <p:commandButton value="#{bundle.Close}" onclick="PF('recipeDialog').hide()" icon="fas fa-window-close"/>
+                          <h:outputText value="#{menuController.selected.description}" style="font-size:15px" /><br/>
+<!--                         CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('wineDialog').hide()" icon="fas fa-window-close"/>
                     
             </h:panelGrid> 
                                  
         </p:outputPanel>  
        
-    </p:dialog>-->
+    </p:dialog>
                 
             </h:form> 
      

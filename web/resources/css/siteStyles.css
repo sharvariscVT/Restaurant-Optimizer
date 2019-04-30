@@ -179,7 +179,12 @@ the speed of the transition to change over time.
 {
 margin-right: 20px !important;
 }
-
+.scalableImage {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    border: none;
+}
 @keyframes ticker {
     0% { transform: translate3d(0, 0, 0); }
     100% { transform: translate3d(-100%, 0, 0); }
