@@ -50,7 +50,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                        <p:menubar>
                             <p:submenu label="Menu" icon='fas fa-utensils' >
                                     <p:menuitem  outcome="/menuPages/WineMenu" value="Wine" onclick="#{menuController.showWineCollection()}" />
-                                    <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
+                                    <p:menuitem outcome="/menuPages/FoodMenu"  value="Food" onclick="#{menuController.showFoodMenu()}"/>
                             </p:submenu>
                            <p:menuitem value="About" url="#" icon='fas fa-info-circle'/>       
                            <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle'/>

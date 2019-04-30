@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FoodMenuViewDlg" widgetVar="FoodMenuViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFoodMenuTitle}">
+            <h:form id="FoodMenuViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{foodMenuController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_id}"/>
+                        <h:outputText value="#{foodMenuController.selected.id}" title="#{bundle.ViewFoodMenuTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_name}"/>
+                        <h:outputText value="#{foodMenuController.selected.name}" title="#{bundle.ViewFoodMenuTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_description}"/>
+                        <h:outputText value="#{foodMenuController.selected.description}" title="#{bundle.ViewFoodMenuTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_foodType}"/>
+                        <h:outputText value="#{foodMenuController.selected.foodType}" title="#{bundle.ViewFoodMenuTitle_foodType}"/>
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_price}"/>
+                        <h:outputText value="#{foodMenuController.selected.price}" title="#{bundle.ViewFoodMenuTitle_price}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FoodMenuViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

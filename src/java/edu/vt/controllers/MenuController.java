@@ -5,7 +5,9 @@
 package edu.vt.controllers;
 
 
+import edu.vt.EntityBeans.FoodMenu;
 import edu.vt.EntityBeans.WineCollection;
+import edu.vt.FacadeBeans.FoodMenuFacade;
 import edu.vt.FacadeBeans.WineCollectionFacade;
 import edu.vt.globals.Constants;
 import java.io.Serializable;
@@ -42,8 +44,27 @@ public class MenuController implements Serializable {
     @Inject 
     private WineCollectionFacade wineFacade;
     
-    private WineCollection selected;
+    @Inject
+    private FoodMenuFacade foodFacade;
 
+    public FoodMenuFacade getFoodFacade() {
+        return foodFacade;
+    }
+
+    public void setFoodFacade(FoodMenuFacade foodFacade) {
+        this.foodFacade = foodFacade;
+    }
+    
+    private WineCollection selected;
+    private FoodMenu selected2;
+
+    public FoodMenu getSelected2() {
+        return selected2;
+    }
+
+    public void setSelected2(FoodMenu selected2) {
+        this.selected2 = selected2;
+    }
     public WineCollection getSelected() {
         return selected;
     }
@@ -63,6 +84,15 @@ public class MenuController implements Serializable {
     }
     private List<WineCollection> wineCollection = null;
 
+    private List<FoodMenu> foodMenu = null;
+
+    public List<FoodMenu> getFoodMenu() {
+        return foodMenu;
+    }
+
+    public void setFoodMenu(List<FoodMenu> foodMenu) {
+        this.foodMenu = foodMenu;
+    }
     public WineCollectionFacade getWineFacade() {
         return wineFacade;
     }
@@ -130,6 +160,14 @@ public class MenuController implements Serializable {
         System.out.println(wineCollection);
         
          
+    }
+    
+    public void showFoodMenu(){
+        getFoodMenu();
+        foodMenu = new ArrayList<>();
+        System.out.println("inside foodmenu");
+        foodMenu = foodFacade.findAllFood();
+        System.out.println(foodMenu.size());
     }
     
     
