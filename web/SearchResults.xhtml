@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Sharvari Chougule on 2018.06.24
+Copyright © 2018 Sharvari Chougule. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    
+        <ui:composition template="/template/siteTemplate.xhtml">
+
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center">
+                <br></br><br></br><h><font size="+3" color="maroon">Search Results</font></h><br></br><br></br>
+                 <h:form id="WineForm" class="ui-datatable-data" style="width:80%; ">
+                     <p:dataGrid  value="#{wineSearchController.getSearchItems()}" var="wines"
+                             paginator="true" layout="grid"  
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                             rowsPerPageTemplate="6,12,16" columns="1" rows="12">
+
+                    <p:panel><table style="width:95%; margin:0 auto; align-content: center">
+                            <tr >
+                    
+                             <td width="200px"><h:graphicImage value="/resources/images/Wines/#{wines.wineName}.png"
+                                            width="150px" height="200px"  /> </td> 
+                                
+                             <td width="500px" align="right"><table><tr><td>#{wines.wineName}</td></tr>
+                                     <tr><td></td></tr>
+                                     <tr><td></td></tr></table></td>
+                             <td>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                                     
+                                     <h:outputText styleClass="fas fa-info-circle fa-2x" style="margin:0 auto; align-self:right" />
+                                             
+                               </td>                                
+                                
+                         </tr>
+                     </table>
+                     
+                    </p:panel>   
+                            
+                             
+                </p:dataGrid>
+                     <br></br>
+                       <p:button outcome="/Search" value="Search Again" icon="fas fa-search"  />
+
+
+        
+             
+            </h:form> 
+     
+            </div>   
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
