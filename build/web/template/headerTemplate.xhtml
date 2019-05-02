@@ -56,7 +56,20 @@ Copyright © 2018 Osman Balci. All rights reserved.
                            <p:separator id="customSeparator1" style="width:55px;clear: none;" />
                            <p:menuitem value="About" url="http://blacksburgwinelab.com?faces-redirect=true" icon='fas fa-info-circle'/> 
                            <p:separator id="customSeparator2" style="width:55px;clear: none;" />
-                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-check-circle' />
+                           <c:if test="#{userController.isLoggedIn() == false}">  
+                           <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-utensils-alt' />
+                           </c:if>
+                           <c:if test="#{userController.isLoggedIn() == true}">  
+                               
+                               <c:if  test="#{userController.isAdministrator() == false}">
+                           <p:menuitem value="Book a Table" outcome="/tableBooking/BookTable" icon='fas fa-check-circle' />
+                               </c:if>
+                               
+                                <c:if  test="#{userController.isAdministrator() == true}">
+                           <p:menuitem value="List of All Bookings" outcome="/tableBooking/BookingsList" icon='fas fa-check-circle' />
+                               </c:if>
+                              
+                           </c:if>
                            <p:separator id="customSeparator3" style="width:55px;clear: none;" />
                            <p:menuitem value="Contact Us" url="#" icon='fas fa-phone-square' />
                            <p:separator id="customSeparator4" style="width:55px;clear: none;" />

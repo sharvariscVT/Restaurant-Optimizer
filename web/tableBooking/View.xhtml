@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTableBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_id}"/>
+                    <h:outputText value="#{tableBookingController.selected.id}" title="#{bundle.ViewTableBookingTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_username}"/>
+                    <h:outputText value="#{tableBookingController.selected.username}" title="#{bundle.ViewTableBookingTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_firstName}"/>
+                    <h:outputText value="#{tableBookingController.selected.firstName}" title="#{bundle.ViewTableBookingTitle_firstName}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_middleName}"/>
+                    <h:outputText value="#{tableBookingController.selected.middleName}" title="#{bundle.ViewTableBookingTitle_middleName}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_lastName}"/>
+                    <h:outputText value="#{tableBookingController.selected.lastName}" title="#{bundle.ViewTableBookingTitle_lastName}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_email}"/>
+                    <h:outputText value="#{tableBookingController.selected.email}" title="#{bundle.ViewTableBookingTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_bookingDate}"/>
+                    <h:outputText value="#{tableBookingController.selected.bookingDate}" title="#{bundle.ViewTableBookingTitle_bookingDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_bookingTime}"/>
+                    <h:outputText value="#{tableBookingController.selected.bookingTime}" title="#{bundle.ViewTableBookingTitle_bookingTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTableBookingLabel_numberPeople}"/>
+                    <h:outputText value="#{tableBookingController.selected.numberPeople}" title="#{bundle.ViewTableBookingTitle_numberPeople}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tableBookingController.destroyAndView}" value="#{bundle.ViewTableBookingDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTableBookingEditLink}"/>
+                <br />
+                <h:commandLink action="#{tableBookingController.prepareCreate}" value="#{bundle.ViewTableBookingCreateLink}" />
+                <br />
+                <h:commandLink action="#{tableBookingController.prepareList}" value="#{bundle.ViewTableBookingShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTableBookingIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
