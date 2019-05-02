@@ -52,6 +52,9 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                     </h:link>
                                 </li>
 
+                                
+                                
+
                                
 
                                 <li class="verticalMenuItem">
@@ -84,6 +87,17 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                     -->
                                     <h:link outcome="/userPasswordChange/EnterUsername">
                                         <i class="fas fa-key"></i>&nbsp;Change Password
+                                    </h:link>
+                                </li>
+                                
+                                 <li class="verticalMenuItem">
+                                    <!--
+                                    ================================
+                                    |          User Bookings            |
+                                    ================================
+                                    -->
+                                    <h:link outcome="/tableBooking/UserBookingsList">
+                                        <i class="fas fa-book"></i>&nbsp;Bookings
                                     </h:link>
                                 </li>
 
@@ -150,7 +164,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             USER'S PROFILE PHOTO: Display the user's account profile photo in a circle. 
                             The cache="false" option enables immediate display of a newly uploaded photo without using cache.
                             -->
-                            <p:graphicImage cache="false" class="profilePhoto" value="#{userController.userPhoto()}" />
+                          <!--  <p:graphicImage cache="false" class="profilePhoto" value="#{userController.userPhoto()}" /> -->
                             <br />
                             <br />
                             <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" >

@@ -3,17 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/template/headerTemplate.xhtml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/WEB-INF/search/search.xhtml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/src/java/edu/vt/globals/Constants.java</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/WEB-INF/search/SearchResults.xhtml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/WEB-INF/web.xml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/WEB-INF/glassfish-web.xml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/resources/css/siteStyles.css</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/menuPages/WineMenu.xhtml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/index.xhtml</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/src/java/edu/vt/controllers/WineCollectionController.java</file>
-            <file>file:/Users/ashishkotian/NetBeansProjects/Restaurant-Optimizer1/web/resources/css/siteStyles2.css</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/java/edu/vt/FacadeBeans/TableBookingFacade.java</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/userAccount/UsersList.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/userAccount/UserDetails.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/userAccount/CreateAccount.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/java/edu/vt/FacadeBeans/AbstractFacade.java</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/java/edu/vt/controllers/TableBookingController.java</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/template/headerTemplate.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/tableBooking/DisplayBooking.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/userAccount/AdminProfile.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/tableBooking/BookTable.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/WEB-INF/glassfish-resources.xml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/web/tableBooking/BookingsList.xhtml</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/java/edu/vt/controllers/UserController.java</file>
+            <file>file:/C:/Users/sandh/Documents/NetBeansProjects/SEProject/Restaurant-Optimizer/src/java/edu/vt/EntityBeans/TableBooking.java</file>
         </group>
     </open-files>
 </project-private>

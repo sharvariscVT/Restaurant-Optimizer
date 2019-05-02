@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci  
+Copyright © 2019 Osman Balci . All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- This page displays all the users from the Database HealthSurveysDB -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Bookings List"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:95%">
+
+                <h1>List of All Bookings</h1>
+
+                <h:form id="BookingsListForm">
+
+                    <p:panel>
+
+                        <p:dataTable id="datalist" value="#{tableBookingController.getItems()}" var="item"
+                                     selectionMode="single" selection="#{tableBookingController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="5,10,20,30,40,50"
+                                     class="dataTable">
+
+                            <p:ajax event="rowSelect"  update=" deleteButton "/> />
+                            <p:ajax event="rowUnselect" update=" deleteButton "/>
+
+                            
+                            
+                            
+                            <!--
+                            ********************************
+                            *    First Name    *
+                            ********************************
+                            -->
+                            <p:column headerText="First Name" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getFirstName()}"/>
+                            </p:column>
+
+                            <!--
+                            ********************************
+                            *      Last Name       *
+                            ********************************
+                            -->
+                            <p:column sortBy="#{item.lastName}" headerText="Last Name" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getLastName()}">
+                                </h:outputText>
+                            </p:column>
+
+                           <!--
+                            ********************************
+                            *      UserName     *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column sortBy="#{item.username}" headerText="Username" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getUsername()}">
+                                </h:outputText>
+                            </p:column>
+                            
+                            <!--
+                            ********************************
+                            *      Email     *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column sortBy="#{item.email}" headerText="Email" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getEmail()}">
+                                </h:outputText>
+                            </p:column>
+                            
+                             <!--
+                            ********************************
+                            *      Booking Date     *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column sortBy="#{item.bookingDate}" headerText="Booking Date" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getBookingDate()}">
+                                     <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            
+                               
+
+                            
+                               <!--
+                            ********************************
+                            *      Booking Time     *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column  headerText="Booking Time" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getBookingTime()}">
+                                      <f:convertDateTime pattern="HH:mm" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            
+                               <!--
+                            ********************************
+                            *      Number of People  *
+                            ********************************
+                            -->
+                            
+                            
+                               <p:column  headerText="Number of people" style="text-align:center; width:14%;">
+                                <h:outputText value="#{item.getNumberPeople()}">
+                                </h:outputText>
+                            </p:column>
+                           
+                            <!--
+                            ********************************
+                            *           Footer             *
+                            ********************************
+                            -->
+                            
+                             <f:facet name="footer">
+                                 <!-- **********************************************
+                                Display a Confirmation dialog for the DELETE button for
+                                 deleting the selected Public Video from the database.
+                                *********************************************** -->
+                                <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
+                                                 actionListener="#{tableBookingController.destroy}" 
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                                 disabled="#{empty tableBookingController.selected}">
+
+                                    <p:confirm header="Delete Confirmation" 
+                                               message="Are you sure you want to permanently delete the selected booking from the database?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                                </p:commandButton>
+
+                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" >
+                                    <div align="center">
+                                        <!-- Clicking 'No' will not delete the selected public video
+                                        from the database. 
+                                        The value of the first button listed below will be shown as 
+                                        highlighted (default action) when displayed -->
+                                        <p:commandButton value="No" type="button" 
+                                                         class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        
+                                         <!-- Clicking 'Yes' will delete the selected public video
+                                        from the database. -->
+                                        <p:commandButton value="Yes" type="button" 
+                                                         class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
+                            </f:facet>
+                        </p:dataTable>
+                        
+                        
+                          <h1>Total Number of Tables Booked = #{tableBookingController.getNumTablesBooked()} </h1>
+                          
+                    </p:panel>
+                </h:form>
+            </div>
+           
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>

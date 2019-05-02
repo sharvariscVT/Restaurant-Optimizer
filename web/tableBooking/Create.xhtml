@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTableBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tableBookingController.selected.id}" title="#{bundle.CreateTableBookingTitle_id}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_username}" for="username" />
+                    <h:inputText id="username" value="#{tableBookingController.selected.username}" title="#{bundle.CreateTableBookingTitle_username}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_username}"/>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_firstName}" for="firstName" />
+                    <h:inputText id="firstName" value="#{tableBookingController.selected.firstName}" title="#{bundle.CreateTableBookingTitle_firstName}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_firstName}"/>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_middleName}" for="middleName" />
+                    <h:inputText id="middleName" value="#{tableBookingController.selected.middleName}" title="#{bundle.CreateTableBookingTitle_middleName}" />
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_lastName}" for="lastName" />
+                    <h:inputText id="lastName" value="#{tableBookingController.selected.lastName}" title="#{bundle.CreateTableBookingTitle_lastName}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_lastName}"/>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{tableBookingController.selected.email}" title="#{bundle.CreateTableBookingTitle_email}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_bookingDate}" for="bookingDate" />
+                    <h:inputText id="bookingDate" value="#{tableBookingController.selected.bookingDate}" title="#{bundle.CreateTableBookingTitle_bookingDate}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_bookingDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_bookingTime}" for="bookingTime" />
+                    <h:inputText id="bookingTime" value="#{tableBookingController.selected.bookingTime}" title="#{bundle.CreateTableBookingTitle_bookingTime}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_bookingTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTableBookingLabel_numberPeople}" for="numberPeople" />
+                    <h:inputText id="numberPeople" value="#{tableBookingController.selected.numberPeople}" title="#{bundle.CreateTableBookingTitle_numberPeople}" required="true" requiredMessage="#{bundle.CreateTableBookingRequiredMessage_numberPeople}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tableBookingController.create}" value="#{bundle.CreateTableBookingSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tableBookingController.prepareList}" value="#{bundle.CreateTableBookingShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTableBookingIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

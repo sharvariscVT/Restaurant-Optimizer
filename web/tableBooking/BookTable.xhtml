@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Sandhya Manjunatha Bharadwaj 
+Copyright © 2018 Sandhya Manjunatha Bharadwaj . All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Create Account"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:50%; margin:0 auto;">
+
+                <h:form id="BookingForm">
+
+                    <h1>Book a Table at Blacksburg WineLab</h1>
+
+                    <p:panelGrid columns="2" columnClasses="panelGridCol1, panelGridCol2">
+                        <!--
+                        ********************************
+                        *          Booking Date        *
+                        ********************************
+                        -->
+                       
+                        <!--
+                        The required="true" attribute automatically places an asterisk *
+                        at the end of the value to indicate that the field is required.  
+                        -->
+                         <p:outputLabel value="Select a Date" for="bookingDate" style=" font-weight: bold " />
+                                               
+                         <p:calendar id="bookingDate" value="#{tableBookingController.bookingDate}" pattern="MM/dd/yyyy" required="true" 
+                                     requiredMessage="Please Select a Date for Table Booking" >
+                     
+                         </p:calendar>
+
+                        <!--
+                        ********************************
+                        *         Booking Time         *
+                        ********************************
+                        -->
+                      <p:outputLabel value="Select a Time" for="bookingTime" style=" font-weight: bold " />
+                                               
+                         <p:datePicker id="bookingTime" value="#{tableBookingController.bookingTime}" pattern="HH:mm" required="true" timeOnly="true"
+                        
+                                     requiredMessage="Please Select a Time for Table Booking" >
+                     
+                         </p:datePicker>
+
+                        <!--
+                        ********************************
+                        *           Number of people        *
+                        ******************************** 
+                        -->
+                         <p:outputLabel value="Enter number of people" for="numberPeople" style=" font-weight: bold " />
+                        <p:inputText id="numberPeople" value="#{tableBookingController.numberPeople}" 
+                                     required="true" class="inputTextField"
+                                     requiredMessage="Please enter ethe number of people for Table Booking">
+                          
+                        </p:inputText>
+
+
+                        
+                       
+                    </p:panelGrid>
+                    <br />
+
+                    <!--
+                    ================================
+                    |      Book a Table         |
+                    ================================
+                    -->
+                    <p:commandButton id="Book" value="Book" action="#{tableBookingController.bookTable()}" update=":growlInfoMessage"
+                                     ajax="false" icon="fas fa-utensils-alt" /> 
+                    
+                    
+                    &nbsp;&nbsp;
+                    <!--
+                    ================================
+                    |        CANCEL Button         |
+                    ================================
+                    -->
+                                     
+                     <p:commandButton value="Cancel" icon="fas fa-ban" ajax="false"
+                                             actionListener="#{tableBookingController.clearBooking()}" immediate="true" >
+                    
+                     <p:resetInput target="BookingForm" />
+                   </p:commandButton>
+                      
+                            &nbsp;
+                           
+
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
