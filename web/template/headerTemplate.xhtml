@@ -59,7 +59,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             
                          <c:choose>
                             <c:when test="#{userController.isLoggedIn() == false}">
-                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fa fa-sign-in'>
+                               <p:menuitem outcome="/SignIn" style="color:black" value="Sign In" icon='fas fa-sign-in-alt'>
                                </p:menuitem></c:when>
                             <c:otherwise test="userController.isLoggedIn() == false">
                                 <c:choose>

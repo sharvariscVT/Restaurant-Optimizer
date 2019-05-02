@@ -31,40 +31,48 @@ import javax.inject.Inject;
 public class WineCollectionController implements Serializable {
 
     @EJB
-    private edu.vt.FacadeBeans.WineCollectionFacade ejbFacade;
+    private WineCollectionFacade wineCollectionFacade;
     private List<WineCollection> items = null;
     private WineCollection selected;
+    private List<WineCollection> searchItems = null;
+    // searchField refers to Wine Name or All
+    private String searchField;
 
-    @Inject 
+    // searchString contains the character string the user entered for searching the selected searchField
+    private String searchString;
+
+    @Inject
     private WineCollectionFacade wineFacade;
-    
-      public WineCollectionFacade getWineFacade() {
+
+    public WineCollectionFacade getWineFacade() {
         return wineFacade;
     }
-       public void setWineFacade(WineCollectionFacade wineFacade) {
+
+    public void setWineFacade(WineCollectionFacade wineFacade) {
         this.wineFacade = wineFacade;
     }
 
     @Inject
     MenuController menuController;
-    
+
     private boolean isWineFileUploaded;
 
     public boolean isWineFileUploaded() {
         return isWineFileUploaded;
     }
-   
 
     public void setWineFileUploaded(boolean wineFileUploaded) {
         this.isWineFileUploaded = wineFileUploaded;
     }
+
     public String winPhotoStoragePath() {
         return Constants.RELATIVE_STORAGE_PATH;
     }
-    public String winePhotoStoragePath(){
+
+    public String winePhotoStoragePath() {
         return Constants.ABSOLUTE_STORAGE_PATH;
     }
-    
+
     public WineCollectionController() {
     }
 
@@ -76,21 +84,27 @@ public class WineCollectionController implements Serializable {
         this.selected = selected;
     }
 
+    private WineCollectionFacade getWineCollectionFacade() {
+        return wineCollectionFacade;
+    }
+
+    public void setWineCollectionFacade(WineCollectionFacade wineCollectionFacade) {
+        this.wineCollectionFacade = wineCollectionFacade;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
     protected void initializeEmbeddableKey() {
     }
 
-    private WineCollectionFacade getFacade() {
-        return ejbFacade;
-    }
-     public String cancel() {
+    public String cancel() {
         // Unselect previously selected company if any
         selected = null;
         return "/userAccount/AdminProfile?faces-redirect=true";
     }
-      public void deleteWineFile() {
+
+    public void deleteWineFile() {
 
         // This sets the necessary flag to ensure the messages are preserved.
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -116,17 +130,16 @@ public class WineCollectionController implements Serializable {
         }
     }
 
-
     public WineCollection prepareCreate() {
-        
+
         setWineFileUploaded(false);
         selected = new WineCollection();
-        
+        System.out.println("-----------inside prepare");
         return selected;
     }
 
     public void create() {
-         Methods.preserveMessages();
+        Methods.preserveMessages();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("WineCollectionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null;
@@ -135,15 +148,14 @@ public class WineCollectionController implements Serializable {
     }
 
     public void update() {
-         Methods.preserveMessages();
+        Methods.preserveMessages();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("WineCollectionUpdated"));
     }
 
     public void destroy() {
-         Methods.preserveMessages();
-        
-        
-         try {
+        Methods.preserveMessages();
+
+        try {
             // Obtain the company logo file URI
             String companyLogoFileURI = Constants.ABSOLUTE_STORAGE_PATH + getSelected().getWineName() + ".png";
 
@@ -157,11 +169,9 @@ public class WineCollectionController implements Serializable {
             Methods.showMessage("Fatal Error", "Something went wrong during wine image deletion!",
                     "See: " + ex.getMessage());
         }
-        
-        
+
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("WineCollectionDeleted"));
-        
-        
+
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -176,11 +186,63 @@ public class WineCollectionController implements Serializable {
         return items;
     }
 
+    public String getSearchField() {
+        return searchField;
+    }
+
+    public void setSearchField(String searchField) {
+        this.searchField = searchField;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
+
+    public List<WineCollection> getSearchItems() {
+        /*
+        =============================================================================================
+        You must construct and return the search results List "searchItems" ONLY IF the List is null. 
+        Any List provided to p:dataTable to display must be returned ONLY IF the List is null
+        ===> in order for the column-sort to work. <===
+        =============================================================================================
+         */
+        if (searchItems == null) {
+            switch (searchField) {
+                case "WineName":
+                    // Return the list of object references of all those companies where 
+                    // company name contains the search string 'searchString' entered by the user.
+                    searchItems = getWineCollectionFacade().nameQuery(searchString);
+                    break;
+
+                default:
+                    // Return the list of object references of all those companies where company name,
+                    // ticker symbol, or sector name contains the search string 'searchString' entered by the user.
+                    searchItems = getWineCollectionFacade().allQuery(searchString);
+            }
+        }
+        return searchItems;
+    }
+
+    public String search() {
+        // Unselect previously selected game if any before showing the search results
+        selected = null;
+
+        // Invalidate list of search items to trigger re-query.
+        searchItems = null;
+        System.out.println(",,,,,,,,,,,,,,ChouguleDone");
+        return "/search/SearchResults?faces-redirect=true";
+
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
-        
-          Methods.preserveMessages();
+
+        Methods.preserveMessages();
         if (selected != null) {
-          
+
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getWineFacade().edit(selected);

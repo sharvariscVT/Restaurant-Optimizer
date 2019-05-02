@@ -34,8 +34,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "WineCollection.findByDescription", query = "SELECT w FROM WineCollection w WHERE w.description = :description")
     , @NamedQuery(name = "WineCollection.findByGlassprice", query = "SELECT w FROM WineCollection w WHERE w.glassprice = :glassprice")
     , @NamedQuery(name = "WineCollection.findByBottleprice", query = "SELECT w FROM WineCollection w WHERE w.bottleprice = :bottleprice")
-    , @NamedQuery(name = "WineCollection.findByWinetype", query = "SELECT w FROM WineCollection w WHERE w.winetype = :winetype")})
+    , @NamedQuery(name = "WineCollection.findByWinetype", query = "SELECT w FROM WineCollection w WHERE w.winetype = :winetype")
+    , @NamedQuery(name = "WineCollection.findByIsAvailable", query = "SELECT w FROM WineCollection w WHERE w.isAvailable = :isAvailable")})
 public class WineCollection implements Serializable {
+
+    @Column(name = "isAvailable")
+    private Short isAvailable;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -151,7 +155,7 @@ public class WineCollection implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+       hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -171,6 +175,14 @@ public class WineCollection implements Serializable {
     @Override
     public String toString() {
         return "edu.vt.EntityBeans.WineCollection[ id=" + id + " ]";
+    }
+
+    public Short getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Short isAvailable) {
+        this.isAvailable = isAvailable;
     }
     
 }

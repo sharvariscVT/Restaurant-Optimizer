@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Osman Balci on 2018.06.18
+Copyright © 2018 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Create"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:97%">
+                 <h1>Create a New Food Menu</h1>
+                <br />
+                <h:form id="foodCreateForm" class="ui-datatable-data">
+
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" >
+
+                            <!--
+                            When the user clicks the CREATE button in List.xhtml, actionListener="#{companyController.prepareCreate}" 
+                            executes the prepareCreate method in which a new Company object is instantiated and its object reference
+                            is stored in the "selected" instance variable. Thus, "selected" points to a newly created Company object
+                            with property (instance variable) values set to empty or null. The inputText data fields below are 
+                            intended to assign user-provided values to the properties.
+                            -->
+                            <p:outputLabel value="#{bundle.CreateFoodMenuLabel_name}" for="name" />
+                            
+                            <p:inputText id="name" class="dataFields" value="#{foodMenuController.selected.name}" 
+                                         placeholder="Enter Food Name" required="true" 
+                                         requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_name}"/>
+
+                            <p:outputLabel value="#{bundle.CreateFoodMenuLabel_description}" for="description" />
+                            <!-- The entered value is set to be the selected new company object's property 'exchange'  -->
+                            <p:inputText id="description" class="dataFields" value="#{foodMenuController.selected.description}" 
+                                         placeholder="Enter Description"  />
+                                     
+
+                            <p:outputLabel value="#{bundle.CreateFoodMenuLabel_foodType}" for="type" />
+                            <!-- The entered value is set to be the selected new company object's property 'ticker'  -->
+                            <p:inputText id="type" class="dataFields" value="#{foodMenuController.selected.foodType}" 
+                                         placeholder="Enter Type of Food"            />
+
+                             
+                            <p:outputLabel value="#{bundle.CreateFoodMenuLabel_price}" for="price" />
+                           
+                            <p:inputText id="price" class="dataFields" value="#{foodMenuController.selected.price}" 
+                                         placeholder="Enter Price of the Food Menu" required="true" 
+                                         requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_price}"
+                                          />
+                                
+                          
+                          
+                            <p:outputLabel value="Food Image: " class="facetHeader" />
+                            <h:graphicImage value="resources/images/food/#{foodMenuController.selected.name}.png" 
+                                            class="companyLogo" />
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                    <br /><br />
+                    <h:panelGroup>
+                       
+                        <p:commandButton value="Upload Food File" action="/UploadFile2?faces-redirect=true" 
+                                         icon="fas fa-upload" ajax="false"  />
+                        &nbsp;
+                        <!-- 
+                        ===================
+                        |   SAVE Button   |
+                        ===================
+                        
+                        The SAVE button becomes enabled AFTER company logo file is uploaded.
+                        The logo file can be uploaded only if the user entered values in all data fields.
+                        -->
+                        <p:commandButton value="Save" action="/useAccount/AdminProfile" 
+                                         actionListener="#{foodMenuController.create()}" 
+                                         icon="fas fa-save" ajax="false"  
+                                         disabled="#{foodMenuController.isFoodFileUploaded() == false}" />
+                        &nbsp;
+
+                        <!-- 
+                        =================================
+                        |   Conditional CANCEL Button   |
+                        =================================
+                        The CANCEL button looks the same but has 2 different functionalities.
+                        -->
+                        <c:if test="#{foodMenuController.isFoodFileUploaded() == false}">
+                            <!-- 
+                            Call the cancel() method immediately without first rendering this JSF page.
+                            The cancel() method will make the selected company object null and show the List page.
+                            -->
+                            <p:commandButton value="Cancel" action="#{foodMenuController.cancel()}" 
+                                             icon="fas fa-ban" ajax="false" immediate="true" />
+                        </c:if>
+                        <c:if test="#{foodMenuController.isFoodFileUploaded() == true}">
+                            <!-- 
+                            Show the List page while executing the deleteLogoFile() method of the backing bean
+                            companyController to delete the uploaded company logo file since it is being cancelled. 
+                            --> 
+                            <p:commandButton value="Cancel" action="/useAccount/AdminProfile"
+                                             icon="fas fa-ban" ajax="false" 
+                                             actionListener="#{foodMenuController.deleteFoodFile()}" />
+                        </c:if>
+
+                    </h:panelGroup>
+
+                </h:form>
+        
+                
+            </div>
+            <br /><br />
+        </ui:define>
+    </ui:composition>
+</html>

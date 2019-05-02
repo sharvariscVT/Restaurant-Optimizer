@@ -4,19 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/FacadeBeans/WineCollectionFacade.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/userAccount/Profile.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/userAccount/AdminProfile.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/MenuController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/UserController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/WineCollectionController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/FacadeBeans/FoodMenuFacade.java</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/managers/FileUploadManager.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/UploadFile.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/FoodMenu.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/globals/Constants.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/UploadFile2.xhtml</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/userAccount/AdminProfile.xhtml</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/EntityBeans/WineCollection.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/controllers/WineCollectionController.java</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/createWineMenu.xhtml</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/edu/vt/EntityBeans/FoodMenu.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/createFoodMenu.xhtml</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/template/headerTemplate.xhtml</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/src/java/Bundle.properties</file>
             <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/menuPages/WineMenu.xhtml</file>
         </group>
     </open-files>

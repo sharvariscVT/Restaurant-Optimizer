@@ -75,6 +75,12 @@
                             </f:facet>
                             <h:outputText value="#{item.winetype}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWineCollectionTitle_isAvailable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.isAvailable}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{wineCollectionController.prepareCreate}" update=":WineCollectionCreateForm" oncomplete="PF('WineCollectionCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WineCollectionViewForm" oncomplete="PF('WineCollectionViewDialog').show()" disabled="#{empty wineCollectionController.selected}"/>

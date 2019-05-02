@@ -28,6 +28,8 @@
                         <p:inputText id="bottleprice" value="#{wineCollectionController.selected.bottleprice}" title="#{bundle.CreateWineCollectionTitle_bottleprice}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_bottleprice}"/>
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_winetype}" for="winetype" />
                         <p:inputText id="winetype" value="#{wineCollectionController.selected.winetype}" title="#{bundle.CreateWineCollectionTitle_winetype}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_winetype}"/>
+                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_isAvailable}" for="isAvailable" />
+                        <p:inputText id="isAvailable" value="#{wineCollectionController.selected.isAvailable}" title="#{bundle.CreateWineCollectionTitle_isAvailable}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{wineCollectionController.create}" value="#{bundle.Save}" update="display,:WineCollectionListForm:datalist,:growl" oncomplete="handleSubmit(args,'WineCollectionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="WineCollectionCreateDialog.hide()"/>

@@ -59,7 +59,19 @@ Copyright © 2019 Sharvari Chougule. All rights reserved.
                                     ================================
                                     -->
                                     <h:commandLink  action="/menuPages/createWineMenu" class="standardText" actionListener="#{wineCollectionController.prepareCreate()}">
-                                            <i class="fas fa-file-alt"></i>&nbsp;Create Wine/Menu Entry
+                                            <i class="fas fa-file-alt"></i>&nbsp;Create Wine Entry
+                                    </h:commandLink>
+                                </li>
+                                
+                                
+                                 <li class="verticalMenuItem">
+                                    <!--
+                                    ================================
+                                    |   Generate Report Link       |
+                                    ================================
+                                    -->
+                                    <h:commandLink  action="/menuPages/createFoodMenu" class="standardText" actionListener="#{foodMenuController.prepareCreate()}">
+                                            <i class="fas fa-file-alt"></i>&nbsp;Create Menu Entry
                                     </h:commandLink>
                                 </li>
 

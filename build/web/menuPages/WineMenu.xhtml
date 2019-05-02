@@ -27,58 +27,96 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                              paginator="true" layout="grid"  
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                              rowsPerPageTemplate="6,12,16" columns="1" rows="12">
+
                     <p:panel><table style="width:95%; margin:0 auto; align-content: center">
                             <tr >
-                                <td width="200px" height="300px"><img value="#{wineCollectionController.winePhotoStoragePath()}#{wines.wineName}.png"
-                                            width="100px"   class="scalableImage"/> </td>   
+                    
+                             <td width="200px"><h:graphicImage value="/resources/images/Wines/#{wines.wineName}.png"
+                                            width="150px" height="150px"  /> </td>   
+                                
                              <td width="400px" align="center"><table><tr><td>#{wines.wineName}</td></tr>
                                      <tr><td></td></tr>
                                      <tr><td></td></tr></table></td>
-                             <td>
-                                 <p:commandLink update=":WineForm:wineDetail" oncomplete="PF('wineDialog').show()" title="View Detail">
-                                   
+                             <td width="200px">
+                                 
+                                     
                                      <h:outputText styleClass="fas fa-info-circle fa-2x" style="margin:0 auto; align-self: flex-end" />
-                                                 
-                                   <f:setPropertyActionListener value="#{wines}" target="#{menuController.selected}" />
-                                                 
-                                 </p:commandLink>   
-                               </td>                                
+                                             
+                               </td>     
+                               <c:choose> 
+                                <c:when test="#{wines.isAvailable}">
+                                
+                                </c:when>
+                               </c:choose>
+                                
                                 
                          </tr>
                      </table>
                      
                     </p:panel>   
+                            
+                            <f:facet name="footer">
+                                
+                                <p:commandButton id="searchButton" icon="fas fa-search" value="Search" 
+                                                 update="WineForm:WineSearchForm" 
+                                                 oncomplete="PF('WineSearchDialog').show()"/>
+                            </f:facet>
                 </p:dataGrid>
                        
-     
-    <!-- Dialog box that displays the information about selected recipe  -->            
-             
-     <p:dialog header="Selected Wine Details" id="wineDetail" widgetVar="wineDialog" modal="true" style="text-align:center"
-                          showEffect="slide" hideEffect="explode" resizable="false"  width="500" height="500">
-                    <p:outputPanel  style="text-align:center;"> 
-                         <h:panelGrid  columns="0" rendered="{not empty menuController.selected}" columnClasses="centered"
-                                       styleClass="ui-panelgrid" cellpadding="10" style="border: 2px solid black"> 
-                           
-                     
-                          
-                             <img src="#{wineCollectionController.winePhotoStoragePath()}#{menuController.selected.wineName}.png"  />
-                      
-                     
-                           <br/> <br/>
-                           
-                           <h:outputText value="#{menuController.selected.wineName} (#{menuController.selected.winetype})" style="font-size:15px" />
-                           <br/><br/>
-
-                          <h:outputText value="#{menuController.selected.description}" style="font-size:15px" /><br/>
-<!--                         CLOSE button -->
-                        <p:commandButton value="#{bundle.Close}" onclick="PF('wineDialog').hide()" icon="fas fa-window-close"/>
+           <p:dialog position="center center" id="WineSearchDlg" widgetVar="WineSearchDialog" modal="true" 
+           resizable="false" appendTo="@(body)" header="Search Wines" >
+            
+            <h:form id="WineSearchForm">
+                <p:panel>                
                     
-            </h:panelGrid> 
-                                 
-        </p:outputPanel>  
-       
-    </p:dialog>
-                
+                    <h:panelGrid columns="4">
+                        
+                        <h:outputLabel value="Search: "/>
+                        
+                        <!-- 
+                        At least 1 character to be searched under the selected category are entered here. 
+                        We need to allow selection of 1 character since a stock ticker can be 1 character 
+                        long such as T for AT&T or F for Ford.
+                        -->
+                        <p:inputText id="searchString" value="#{wineCollectionController.searchString}" 
+                                     required="true" requiredMessage="Please enter a search string!"
+                                     placeholder="Enter search string" >
+                            <f:validateLength minimum="1" />
+                        </p:inputText>
+                        
+                        <span id="space">&nbsp;</span>
+                        
+                        <!-- Search category is selected here. -->
+                        <p:selectOneMenu id="searchField" value="#{wineCollectionController.searchField}"
+                                         required="true" requiredMessage="Please select a category!" >
+
+                            <f:selectItem itemLabel="Select Category" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="All" itemValue="all"/>
+                            <f:selectItem itemLabel="Name" itemValue="Title"/>
+                            
+
+                        </p:selectOneMenu>
+                        
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <br /><br />
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" ajax="false" 
+                                              action="#{wineCollectionController.search()}" /> 
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="#{bundle.Cancel}" onclick="PF('WineSearchDialog').hide()"    
+                                              icon="fas fa-ban" />
+                        </div>
+                    </h:panelGroup>
+
+                </p:panel>
+            </h:form>
+
+        </p:dialog>
+             
             </h:form> 
      
             </div>   
@@ -88,3 +126,4 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
     <!-- Do not enter tags after the composition line since they are ignored by JSF -->
 
 </html>
+

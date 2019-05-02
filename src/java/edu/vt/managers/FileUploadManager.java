@@ -4,6 +4,7 @@
  */
 package edu.vt.managers;
 
+import edu.vt.controllers.FoodMenuController;
 import edu.vt.globals.Constants;
 import edu.vt.controllers.MenuController;
 import edu.vt.controllers.WineCollectionController;
@@ -42,6 +43,9 @@ public class FileUploadManager implements Serializable {
 
     @Inject
     private WineCollectionController wineCollectionController;
+    
+    @Inject 
+    private FoodMenuController foodMenuController ;
     /*
     =========================
     Getter and Setter Methods
@@ -64,6 +68,71 @@ public class FileUploadManager implements Serializable {
      *   Handle the Logo File Upload and Store it in External Directory   *
      **********************************************************************
      */
+    
+    public String uploadFoodFile() throws IOException{
+         Methods.preserveMessages();
+
+        // Check if a file is selected
+        if (file.getSize() == 0) {
+            Methods.showMessage("Fatal Error", "No File Selected!", "Please choose a file first!");
+            foodMenuController.setFoodFileUploaded(false);
+            return "/menuPages/createWineMenu?faces-redirect=true";
+        }
+
+        /*
+        MIME (Multipurpose Internet Mail Extensions) is a way of identifying files on
+        the Internet according to their nature and format. 
+
+        A "Content-type" is simply a header defined in many protocols, such as HTTP, that 
+        makes use of MIME types to specify the nature of the file currently being handled.
+
+        Some MIME file types: (See https://www.freeformatter.com/mime-types-list.html)
+
+            JPEG Image      = image/jpeg or image/jpg
+            PNG image       = image/png
+            Plain text file = text/plain
+            HTML file       = text/html
+            JSON file       = application/json
+         */
+        // Obtain the uploaded file's MIME file type
+        String mimeFileType = file.getContentType();
+
+        if (mimeFileType.startsWith("image/")) {
+            // The uploaded file is an image file
+            /*
+            The subSequence() method returns the portion of the mimeFileType string from the 6th
+            position to the last character. Note that it starts with "image/" which has 6 characters at
+            positions 0,1,2,3,4,5. Therefore, we start the subsequence at position 6 to obtain the file extension.
+             */
+            String fileExtension = mimeFileType.subSequence(6, mimeFileType.length()).toString();
+
+            String fileExtensionInCaps = fileExtension.toUpperCase();
+
+            if (fileExtensionInCaps.endsWith("PNG")) {
+                // File type is acceptable
+            } else {
+                Methods.showMessage("Fatal Error", "Unrecognized Image File!", 
+                        "The uploaded image file must be of type PNG with transparency!");
+                return "/menuPages/createWineMenu?faces-redirect=true";
+            }
+        } else {
+            Methods.showMessage("Fatal Error", "Unrecognized File Type!", 
+                        "The uploaded file must be an image file of type PNG with transparency!");
+            return "/menuPages/createWineMenu?faces-redirect=true";
+        }
+
+        // See the method below
+        storeFoodFile(file);
+
+        // Settings
+        foodMenuController.setFoodFileUploaded(true);
+
+        // Redirect to show the Create page
+        return "/menuPages/createWineMenu?faces-redirect=true";
+    }
+    
+    
+    
     public String upload() throws IOException {
 
         Methods.preserveMessages();
@@ -153,7 +222,7 @@ public class FileUploadManager implements Serializable {
             logoFileName in the external directory Constants.ABSOLUTE_STORAGE_PATH
             using the method inputStreamToFile below.
              */
-            File wineFile = inputStreamToFile(inputStream, wineFileName);
+            File wineFile = inputStreamToFile(inputStream, wineFileName, false);
 
             // Close the input stream and release any system resources associated with it
             inputStream.close();
@@ -166,6 +235,38 @@ public class FileUploadManager implements Serializable {
         }
     }
 
+     public void storeFoodFile(UploadedFile file) throws IOException {
+     Methods.preserveMessages();
+        
+        InputStream inputStream;
+
+        try {
+            /*
+            InputStream is an abstract class, which is the superclass of all classes representing
+            an input stream of bytes. Convert the uploaded file into an input stream of bytes.
+             */
+            inputStream = file.getInputstream();
+
+            // Set the company's logo file name to company's stock symbol (ticker).png
+            String foodFileName = foodMenuController.getSelected().getName() + ".png";
+
+            /*
+            Write the uploaded file's input stream of bytes into the file named
+            logoFileName in the external directory Constants.ABSOLUTE_STORAGE_PATH
+            using the method inputStreamToFile below.
+             */
+            File foodFile = inputStreamToFile(inputStream, foodFileName, true);
+
+            // Close the input stream and release any system resources associated with it
+            inputStream.close();
+            
+            Methods.showMessage("Information", "Success!", "Food File Successfully Uploaded!");
+
+        } catch (IOException ex) {
+            Methods.showMessage("Fatal Error", "Something went wrong while writing the uploaded logo file!",
+                    "See: " + ex.getMessage());
+        }
+     }
     /*
      *******************************************************************************
      *   Write the Given Input Stream of Bytes into a File in External Directory   *
@@ -177,7 +278,7 @@ public class FileUploadManager implements Serializable {
      * @return the created file targetFile
      * @throws IOException
      */
-    private File inputStreamToFile(InputStream inputStream, String targetFilename) throws IOException {
+    private File inputStreamToFile(InputStream inputStream, String targetFilename, Boolean flag) throws IOException {
 
         /*
         inputStream.available() returns an estimate of the number of bytes that can be read from
@@ -193,8 +294,13 @@ public class FileUploadManager implements Serializable {
         Create targetFile with the given targetFilename in the external 
         directory Constants.ABSOLUTE_STORAGE_PATH
          */
-        File targetFile = new File(Constants.ABSOLUTE_STORAGE_PATH, targetFilename);
-
+         File targetFile = null;
+        if(flag){
+            targetFile = new File(Constants.ABSOLUTE_FOODSTORAGRE_PATH, targetFilename);
+        }
+        else if(!flag){
+            targetFile = new File(Constants.ABSOLUTE_STORAGE_PATH, targetFilename);
+        }
         // A file OutputStream is an output stream for writing data to a file
         OutputStream outputStream;
 
