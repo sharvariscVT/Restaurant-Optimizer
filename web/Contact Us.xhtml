@@ -28,13 +28,12 @@ Copyright © 2019 Ashish Kotian. All rights reserved.
                 <h:form>
                     <p:panelGrid columns="2" style="width: 520px; height: 150px" columnClasses="panelGridColumn1, panelGridColumn2">
                         
-                        <h align ="center"> Contact1 :</h>
+                        <h align ="center"> Contact :</h>
                         
-                        <h:outputLabel value="John Boyer" for="username" style="align-content: left"/>
-                        <h:outputLabel value="Contact2 :" for="password" />
-                        <h:outputLabel value="Katie Pritchard" for="username" style="align-content: left"/>
+                        <h:outputLabel value="John Boyer and Katie Pritchard" for="username" style="align-content: left"/>
+                        
                         <h:outputLabel value="Email us at :" for="email" style="align-content: left"/>
-                        <h:outputLabel value="info@blacksburgwinelab.com" for="username" style="align-content: left"/>
+                        <a href="mailto:info@blacksburgwinelab.com" style="color:blue   ">info@blacksburgwinelab.com</a>
                         <h:outputLabel value="Call us at :" for="username" style="align-content: left"/>
                         <h:outputLabel value="540-605-7291" for="username" style="align-content: left"/>
                         <h:outputLabel value="Find us at :" for="username" style="align-content: left"/>
@@ -44,6 +43,44 @@ Copyright © 2019 Ashish Kotian. All rights reserved.
                     </h:form>
                     <br/>
                     <br/>
+                    
+                    <h1><font size="+2">Hours</font></h1><br></br><br></br>
+                    <h:form>
+                        <p:panelGrid columns="2" style="width: 420px; height: 250px" columnClasses="panelGridColumn1, panelGridColumn2">
+                          <h:outputLabel value="Sunday" for="sunday" style="align-content: left"/>  
+                          <h:outputLabel value="Noon to 8pm" for="username" style="align-content: left"/>   
+                          <h:outputLabel value="Monday" for="monday" style="align-content: left"/>  
+                          <h:outputLabel value="4pm to 10pm" for="username" style="align-content: left"/>   
+                          <h:outputLabel value="Tuesday" for="tuesday" style="align-content: left"/>  
+                          <h:outputLabel value="4pm to 10pm" for="username" style="align-content: left"/>   
+                          <h:outputLabel value="Wednesday" for="wednesday" style="align-content: left"/>  
+                          <h:outputLabel value="4pm to 10pm" for="username" style="align-content: left"/>  
+                          <h:outputLabel value="Thursday" for="thursday" style="align-content: left"/>  
+                          <h:outputLabel value="4pm to 10pm" for="username" style="align-content: left"/>  
+                          <h:outputLabel value="Friday" for="friday" style="align-content: left"/>  
+                          <h:outputLabel value="Noon to 11pm" for="username" style="align-content: left"/>
+                          <h:outputLabel value="Saturday" for="saturday" style="align-content: left"/>  
+                          <h:outputLabel value="Noon to 11pm" for="username" style="align-content: left"/>   
+                        </p:panelGrid>
+                    </h:form>
+                    <br></br><br></br>
+                    
+                    <h1><font size="+2"> Have any Suggestions for us? </font></h1>
+                    <br></br>
+                    <h:form>
+                        <p:inputTextarea rows="10" cols="85" placeholder="Please enter your suggestion(s) here" autoResize="true" value="#{suggestionsController.selected.suggestion}" 
+                                         onclick="#{suggestionsController.prepareCreate()}"/>
+                    
+                    <!--
+                    ================================
+                    |         Submit Button       |
+                    ================================
+                    -->
+                    <br></br>
+                    <p:commandButton actionListener="#{suggestionsController.create()}" value="Submit" 
+                                         icon="fas fa-arrow-up" ajax="false"/>
+                    
+                    </h:form>
                     
             </div>
             <br/><br/><br/>
