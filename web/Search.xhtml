@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Ashish Kotian 
+Copyright © 2019 Ashish Kotian. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+          
+            <h:outputText value="Search for Wines"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center" width="100%">
+                <br></br>
+                <h1>Search For Wines</h1>
+                <br />
+
+                <h:form >
+                    <p:panelGrid columns="2" columnClasses="panelGridCol1, panelGridCol2" >
+
+                        <h:outputLabel value="Search For : " for="searchString" style="width:300px"/>
+                        <p:inputText id="searchString" value="#{wineSearchController.searchString}" placeholder="Enter Search String" required="true" class="inputTextField" style="width:300px"
+                                     requiredMessage="#{bundle.CreateUserRequiredMessage_username}" label="string" >
+                        </p:inputText>
+
+                        <h:outputLabel value="Search Category:" for="category" style="width:300px"/>
+                        <p:selectOneMenu id="searchField" value="#{wineSearchController.searchField}"
+                                         required="true" requiredMessage="Please select a category!" style="width:290px">
+
+                            <f:selectItem itemLabel="Select Category" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="All" itemValue="all"/>
+                            <f:selectItem itemLabel="Wine Name" itemValue="Name"/>
+                            <f:selectItem itemLabel="Country of Origin" itemValue="Country"/>
+                            <f:selectItem itemLabel="Year of Manufacture" itemValue="Year"/>
+                            <f:selectItem itemLabel="Type (Choose from Red, White, Rosé and Sparkling)" itemValue="Type"/>
+                            
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <br/>
+                    <br/>
+                    <!--
+                    ================================
+                    |         Submit Button       |
+                    ================================
+                    -->
+                    <p:commandButton id="submit" value="Submit" action="#{wineSearchController.search()}" 
+                                     ajax="false" icon="fas fa-sign-in-alt" />
+                    &nbsp;
+                    
+                    <!--
+                    ================================
+                    |         CANCEL Button        |
+                    ================================
+                    -->
+                    <p:button outcome="/index" value="Cancel" icon="fas fa-ban"  />
+                </h:form>
+
+            </div>
+            <br/><br/><br/>
+        </ui:define>
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>

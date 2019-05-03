@@ -43,9 +43,10 @@ public final class Constants {
 
     
     
-    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/Chougule/DocRoot/WineStorage/";
-
-    public static final String RELATIVE_STORAGE_PATH = "/WineStorage/";
+//    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/Chougule/DocRoot/WineStorage/";
+//
+//    public static final String RELATIVE_STORAGE_PATH = "/WineStorage/";
+    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Wines/";
     
     public static final String ABSOLUTE_FOODSTORAGRE_PATH ="C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Food/";
     

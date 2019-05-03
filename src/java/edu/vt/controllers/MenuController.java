@@ -142,7 +142,7 @@ public class MenuController implements Serializable {
 //    }
 //    
      public String winPhotoStoragePath() {
-        return Constants.RELATIVE_STORAGE_PATH;
+        return Constants.ABSOLUTE_STORAGE_PATH;
     }
     
     public List<WineCollection> getWineCollection() {
