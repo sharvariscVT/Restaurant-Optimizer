@@ -12,8 +12,8 @@ CREATE TABLE FoodMenu
 );
 
 
-insert into FoodMenu(Name, Description, FoodType, price),
-('Marcona almond','Roasted in olive oil with sea salt','Starter', 6),
+insert into FoodMenu(Name, Description, FoodType, price)
+VALUES ('Marcona almond','Roasted in olive oil with sea salt','Starter', 6),
 ('Mixed Olives', 'Kalamata and Mt. Athos olives, pickled garlic, red peppers, & caper berries', 'Starter', 5),
 ('Pancetta crostin', 'Ground pancetta, house made pickle, shallot gel, on crusty bread (three)','Starter',8),
 ('Boquerones','Marinated white anchovies, pickled onions, sea salt crackers', 'Starter', 8),
