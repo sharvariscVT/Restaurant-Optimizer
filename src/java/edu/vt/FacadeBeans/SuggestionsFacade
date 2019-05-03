@@ -1,0 +1,31 @@
+/*
+ * Created by Ashish Kotian on 2019.05.02  * 
+ * Copyright © 2019 Ashish Kotian. All rights reserved. * 
+ */
+package edu.vt.FacadeBeans;
+
+import edu.vt.EntityBeans.Suggestions;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+/**
+ *
+ * @author ashishkotian
+ */
+@Stateless
+public class SuggestionsFacade extends AbstractFacade<Suggestions> {
+
+    @PersistenceContext(unitName = "Restaurant-OptimizerPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public SuggestionsFacade() {
+        super(Suggestions.class);
+    }
+    
+}
