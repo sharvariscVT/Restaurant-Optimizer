@@ -8,10 +8,13 @@
 
     <ui:composition>
 
-        <p:dialog id="WineCollectionViewDlg" widgetVar="WineCollectionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewWineCollectionTitle}">
+        <p:dialog id="WineCollectionViewDlg" widgetVar="WineCollectionViewDialog" modal="true" 
+                  width="700px" resizable="false" appendTo="@(body)" header="#{bundle.ViewWineCollectionTitle}">
+           
+            <div align="center" >
             <h:form id="WineCollectionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{wineCollectionController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{wineCollectionController.selected != null}" columnClasses="panelGridColumn1, panelGridColumn2">
                         <h:outputText value="#{bundle.ViewWineCollectionLabel_id}"/>
                         <h:outputText value="#{wineCollectionController.selected.id}" title="#{bundle.ViewWineCollectionTitle_id}"/>
                         <h:outputText value="#{bundle.ViewWineCollectionLabel_wineName}"/>
@@ -28,10 +31,16 @@
                         <h:outputText value="#{wineCollectionController.selected.bottleprice}" title="#{bundle.ViewWineCollectionTitle_bottleprice}"/>
                         <h:outputText value="#{bundle.ViewWineCollectionLabel_winetype}"/>
                         <h:outputText value="#{wineCollectionController.selected.winetype}" title="#{bundle.ViewWineCollectionTitle_winetype}"/>
+                        <h:outputText value="#{bundle.ViewWineCollectionLabel_isAvailable}"/>
+                        <h:outputText value="#{wineCollectionController.selected.isAvailable}" title="#{bundle.ViewWineCollectionTitle_isAvailable}"/>
                     </p:panelGrid>
+                    
+                    <div align="center">
                     <p:commandButton value="#{bundle.Close}" onclick="WineCollectionViewDialog.hide()"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
+            </div>
         </p:dialog>
 
     </ui:composition>

@@ -6,14 +6,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template/siteTemplate.xhtml">
 
 
         <ui:define name="title">
             <h:outputText value="#{bundle.ListWineCollectionTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
+        <ui:define name="editableContent">
+             <div align="center" style="width:97%">
             <h:form id="WineCollectionListForm">
                 <p:panel header="#{bundle.ListWineCollectionTitle}">
                     <p:dataTable id="datalist" value="#{wineCollectionController.items}" var="item"
@@ -22,64 +23,97 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 class="dataTable"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                       
+                        <p:column headerText="#{bundle.CreateWineCollectionTitle_id}" style="align-content: center; width:10px ">
+                            <h:outputText value="#{item.id}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_wineName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.wineName}"/>
+                        
+                         
+                        <p:column headerText="Photo" style="align-content: center; width:60px;">
+                                 <img src="/resources/images/Wines/#{item.wineName}.png" 
+                                     alt="Wine Photo" width="40" class="recipeImageCenter"/>
+                         </p:column>
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_wineName}" style="align-content: center;" >
+                           
+                            <h:outputText value="#{item.wineName}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_yearofManufacture}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.yearofManufacture}"/>
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_yearofManufacture}" style="align-content: center;"  >
+                            <h:outputText value="#{item.yearofManufacture}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_country}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.country}"/>
+                        
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_country}" style="align-content: center;" >
+                         
+                            <h:outputText value="#{item.country}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
+                        
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_description}" style="align-content: center;" >
+                         
+                            <h:outputText value="#{item.description}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_glassprice}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.glassprice}"/>
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_glassprice}" style="align-content: center; width:60px">
+                            <h:outputText value="$#{item.glassprice}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_bottleprice}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.bottleprice}"/>
+                        
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_bottleprice}" style="align-content: center; width:60px">
+                           
+                            <h:outputText value="#{item.bottleprice}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListWineCollectionTitle_winetype}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.winetype}"/>
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_winetype}" style="align-content: center;" >
+                    
+                            <h:outputText value="#{item.winetype}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
+                        
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_isAvailable}" style="width:60px; align-content: center">
+                            <h:outputText value="#{item.isAvailable}"  class="inputTextField" style="align-content: center"/>
+                        </p:column>
+                        <br/>
+                        
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{wineCollectionController.prepareCreate}" update=":WineCollectionCreateForm" oncomplete="PF('WineCollectionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WineCollectionViewForm" oncomplete="PF('WineCollectionViewDialog').show()" disabled="#{empty wineCollectionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WineCollectionEditForm" oncomplete="PF('WineCollectionEditDialog').show()" disabled="#{empty wineCollectionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{wineCollectionController.destroy}" update=":growl,datalist" disabled="#{empty wineCollectionController.selected}"/>
+                          <p:commandButton id="createButton" icon="fas fa-plus" value="#{bundle.Create}" 
+                                                 actionListener="#{wineCollectionController.prepareCreate}" 
+                                                 update=":WineCollectionCreateForm" oncomplete="PF('WineCollectionCreateDialog').show()"/>
+                            
+                         <p:commandButton id="viewButton" icon="fas fa-eye" value="#{bundle.View}" 
+                                                 update=":WineCollectionViewDlg" oncomplete="PF('WineCollectionViewDialog').show()" 
+                                                 disabled="#{empty wineCollectionController.selected}"/>
+
+                         <p:commandButton id="editButton" icon="fas fa-edit" value="#{bundle.Edit}" 
+                                                 update=":WineCollectionEditDlg" oncomplete="PF('WineCollectionEditDialog').show()" 
+                                                 disabled="#{empty wineCollectionController.selected}"/>
+                            
+                              <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
+                                                 actionListener="#{wineCollectionController.destroyWine}" 
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                                 disabled="#{empty wineCollectionController.selected}">
+                                   <p:confirm header="Confirmation" 
+                                               message="Are you sure you want to permanently delete the selected wine #{wineCollectionController.selected.wineName} from the database?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                            </p:commandButton>
+                            
+                            <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" >
+                                    <div align="center">
+                                          
+                                        <p:commandButton value="No" type="button" 
+                                                         class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button" 
+                                                         class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
+                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -88,6 +122,7 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
+             </div>
         </ui:define>
     </ui:composition>
 

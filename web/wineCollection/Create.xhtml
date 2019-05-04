@@ -8,29 +8,72 @@
 
     <ui:composition>
 
-        <p:dialog id="WineCollectionCreateDlg" widgetVar="WineCollectionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWineCollectionTitle}">
-            <h:form id="WineCollectionCreateForm">
+        <p:dialog id="WineCollectionCreateDlg" widgetVar="WineCollectionCreateDialog" modal="true" resizable="false"
+                  appendTo="@(body)" header="#{bundle.CreateWineCollectionTitle}">
+            
+            <h:form id="WineCollectionCreateForm" class="ui-datatable-data">
+                
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{wineCollectionController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{wineCollectionController.selected != null}">
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{wineCollectionController.selected.id}" title="#{bundle.CreateWineCollectionTitle_id}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{wineCollectionController.selected.id}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_id}" required="true" 
+                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_id}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_wineName}" for="wineName" />
-                        <p:inputText id="wineName" value="#{wineCollectionController.selected.wineName}" title="#{bundle.CreateWineCollectionTitle_wineName}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_wineName}"/>
+                        <p:inputText id="wineName" value="#{wineCollectionController.selected.wineName}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_wineName}" required="true"
+                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_wineName}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_yearofManufacture}" for="yearofManufacture" />
-                        <p:inputText id="yearofManufacture" value="#{wineCollectionController.selected.yearofManufacture}" title="#{bundle.CreateWineCollectionTitle_yearofManufacture}" />
+                        <p:inputText id="yearofManufacture" value="#{wineCollectionController.selected.yearofManufacture}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_yearofManufacture}" />
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_country}" for="country" />
-                        <p:inputText id="country" value="#{wineCollectionController.selected.country}" title="#{bundle.CreateWineCollectionTitle_country}" />
+                        <p:inputText id="country" value="#{wineCollectionController.selected.country}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_country}" />
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{wineCollectionController.selected.description}" title="#{bundle.CreateWineCollectionTitle_description}" />
+                        <p:inputText id="description" value="#{wineCollectionController.selected.description}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_description}" />
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_glassprice}" for="glassprice" />
-                        <p:inputText id="glassprice" value="#{wineCollectionController.selected.glassprice}" title="#{bundle.CreateWineCollectionTitle_glassprice}" />
+                        <p:inputText id="glassprice" value="#{wineCollectionController.selected.glassprice}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_glassprice}" />
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_bottleprice}" for="bottleprice" />
-                        <p:inputText id="bottleprice" value="#{wineCollectionController.selected.bottleprice}" title="#{bundle.CreateWineCollectionTitle_bottleprice}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_bottleprice}"/>
+                        <p:inputText id="bottleprice" value="#{wineCollectionController.selected.bottleprice}" 
+                                     title="#{bundle.CreateWineCollectionTitle_bottleprice}" required="true" class="inputTextField"
+                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_bottleprice}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateWineCollectionLabel_winetype}" for="winetype" />
-                        <p:inputText id="winetype" value="#{wineCollectionController.selected.winetype}" title="#{bundle.CreateWineCollectionTitle_winetype}" required="true" requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_winetype}"/>
+                        <p:inputText id="winetype" value="#{wineCollectionController.selected.winetype}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_winetype}" required="true" 
+                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_winetype}"/>
+                        
+                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_isAvailable} (1/0)" for="isAvailable" />
+                        <p:inputText id="isAvailable" value="#{wineCollectionController.selected.isAvailable}" class="inputTextField"
+                                     title="#{bundle.CreateWineCollectionTitle_isAvailable}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{wineCollectionController.create}" value="#{bundle.Save}" update="display,:WineCollectionListForm:datalist,:growl" oncomplete="handleSubmit(args,'WineCollectionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="WineCollectionCreateDialog.hide()"/>
+                    
+                </h:panelGroup>
+                   
+                <h:panelGroup>
+                    
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{wineCollectionController.create}" value="#{bundle.Create}" 
+                                         icon="fas fa-plus" ajax="false"
+                                         update=":display,:WineCollectionListForm,:datalist,:growl" 
+                                         oncomplete="handleSubmit(args,'WineCollectionCreateDialog');"/>
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('WineCollectionCreateDialog').hide()" 
+                                         immediate="true" icon="fas fa-ban"/>
+                    </div>
+
                 </h:panelGroup>
             </h:form>
         </p:dialog>
