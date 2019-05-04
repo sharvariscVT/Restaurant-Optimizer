@@ -38,14 +38,19 @@ public final class Constants {
     
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
-    public static final String FILES_ABSOLUTE_PATH  = "C:/Users/sandh/DocRoot/CloudStorage/";
-    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/sandh/DocRoot/CloudStorage/";
+    public static final String FILES_ABSOLUTE_PATH  = "C:/Users/Chougule/DocRoot/CloudStorage/";
+    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/Chougule/DocRoot/CloudStorage/";
 
     
     
-    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/sandh/DocRoot/CloudStorage/";
-
-    public static final String RELATIVE_STORAGE_PATH = "/CloudStorage/";
+//    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/Chougule/DocRoot/WineStorage/";
+//
+//    public static final String RELATIVE_STORAGE_PATH = "/WineStorage/";
+    public static final String ABSOLUTE_STORAGE_PATH = "C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Wines/";
+    
+    public static final String ABSOLUTE_FOODSTORAGRE_PATH ="C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Food/";
+    
+    
     /*
     In glassfish-web.xml, we specified an alternate document root (DocRoot) with the statement below
     to allow our application to read and write files external to (outside of) its deployed directory.
