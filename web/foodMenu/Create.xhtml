@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FoodMenuCreateDlg" widgetVar="FoodMenuCreateDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.CreateFoodMenuTitle}">
+            
+            <h:form id="FoodMenuCreateForm" class="ui-datatable-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{foodMenuController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{foodMenuController.selected.id}" title="#{bundle.CreateFoodMenuTitle_id}"
+                                     required="true" requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_id}"/>
+                        
+                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{foodMenuController.selected.name}" title="#{bundle.CreateFoodMenuTitle_name}"
+                                     required="true" requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_name}"/>
+                        
+                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{foodMenuController.selected.description}" 
+                                     title="#{bundle.CreateFoodMenuTitle_description}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_foodType}" for="foodType" />
+                        <p:inputText id="foodType" value="#{foodMenuController.selected.foodType}"
+                                     title="#{bundle.CreateFoodMenuTitle_foodType}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{foodMenuController.selected.price}" title="#{bundle.CreateFoodMenuTitle_price}" 
+                                     required="true" requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_price}"/>
+                    </p:panelGrid>
+                    
+                </h:panelGroup>
+                  <h:panelGroup>
+                    
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{foodMenuController.create}" value="#{bundle.Create}" 
+                                         icon="fas fa-plus" ajax="false"
+                                         update=":display,:FoodMenuListForm,:datalist,:growl" 
+                                         oncomplete="handleSubmit(args,'FoodMenuCreateDialog');"/>
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('FoodMenuCreateDialog').hide()" 
+                                         immediate="true" icon="fas fa-ban"/>
+                    </div>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
