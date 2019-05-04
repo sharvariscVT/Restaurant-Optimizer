@@ -67,7 +67,64 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                         <i class="fas fa-edit"></i>&nbsp;Edit Profile
                                     </h:link>
                                 </li>
+                                
+                                <li class="verticalMenuItem"> 
+                                    <!--
+                                    ================================
+                                    |    SUBSCRIBER LIST OPTION    |
+                                    ================================
+                                    -->
+                                    <c:if test="#{userController.isUserSubscribed() == false}">
+                                        <p:commandLink action="#{userController.joinList()}" update=":UserProfileForm" >
 
+                                        <label style="font-size: 10pt;">
+                                            <i class="fas fa-user-plus"></i>&nbsp;Join Subscriber List
+                                        </label>
+
+                                        <p:confirm header="Join Subscriber List Confirmation" 
+                                                   message="Are you sure to join the subscriber list?" 
+                                                   icon="fas fa-user-plus fa-2x" />
+                                        </p:commandLink>
+                                    <!-- 
+                                    The confirmation dialog is displayed to check if the user really wants to delete the account.
+                                    -->
+                                        <p:confirmDialog id="joinConfirmDialogBox" global="true" showEffect="fade" hideEffect="fade">
+                                        <div align="center">
+                                            <p:commandButton value="No" type="button" 
+                                                             class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                            &nbsp;
+                                            <p:commandButton value="Yes" type="button" 
+                                                             class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                        </div>
+                                        </p:confirmDialog>
+                                    </c:if>
+
+                                    <c:if test="#{userController.isUserSubscribed() == true}">
+                                        <p:commandLink action="#{userController.leaveList()}" update=":UserProfileForm" >
+
+                                        <label style="font-size: 10pt;">
+                                            <i class="fas fa-user-plus"></i>&nbsp;Leave Subscriber List
+                                        </label>
+
+                                        <p:confirm header="Join Subscriber List Confirmation" 
+                                                   message="Are you sure to leave the subscriber list?" 
+                                                   icon="fas fa-user-plus fa-2x" />
+                                        </p:commandLink>
+                                    <!-- 
+                                    The confirmation dialog is displayed to check if the user really wants to delete the account.
+                                    -->
+                                        <p:confirmDialog id="leaveConfirmDialogBox" global="true" showEffect="fade" hideEffect="fade">
+                                        <div align="center">
+                                            <p:commandButton value="No" type="button" 
+                                                             class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                            &nbsp;
+                                            <p:commandButton value="Yes" type="button" 
+                                                             class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                        </div>
+                                        </p:confirmDialog>
+                                    </c:if>
+                                </li>
+                                  
                                 <li class="verticalMenuItem"> 
                                     <!--
                                     ================================
