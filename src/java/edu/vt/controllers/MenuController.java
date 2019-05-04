@@ -5,8 +5,11 @@
 package edu.vt.controllers;
 
 
+import edu.vt.EntityBeans.FoodMenu;
 import edu.vt.EntityBeans.WineCollection;
+import edu.vt.FacadeBeans.FoodMenuFacade;
 import edu.vt.FacadeBeans.WineCollectionFacade;
+import edu.vt.controllers.util.JsfUtil;
 import edu.vt.globals.Constants;
 import java.io.Serializable;
 
@@ -19,6 +22,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -42,7 +46,32 @@ public class MenuController implements Serializable {
     @Inject 
     private WineCollectionFacade wineFacade;
     
+
+    @Inject
+    private FoodMenuFacade foodFacade;
+
+    public FoodMenuFacade getFoodFacade() {
+        return foodFacade;
+    }
+
+    public void setFoodFacade(FoodMenuFacade foodFacade) {
+        this.foodFacade = foodFacade;
+    }
+    
     private WineCollection selected;
+    private FoodMenu selected2;
+    
+    private WineCollectionController wineCollectionController ;
+
+    public WineCollectionController getWineCollectionController() {
+        return wineCollectionController;
+    }
+
+    public void setWineCollectionController(WineCollectionController wineCollectionController) {
+        this.wineCollectionController = wineCollectionController;
+    }
+
+
 
     public WineCollection getSelected() {
         return selected;
@@ -63,6 +92,15 @@ public class MenuController implements Serializable {
     }
     private List<WineCollection> wineCollection = null;
 
+    private List<FoodMenu> foodMenu = null;
+
+    public List<FoodMenu> getFoodMenu() {
+        return foodMenu;
+    }
+
+    public void setFoodMenu(List<FoodMenu> foodMenu) {
+        this.foodMenu = foodMenu;
+    }
     public WineCollectionFacade getWineFacade() {
         return wineFacade;
     }
@@ -96,8 +134,10 @@ public class MenuController implements Serializable {
                     "See: " + ex.getMessage());
         }
     }
-
-
+      
+     
+      
+      
     public void setWineFacade(WineCollectionFacade wineFacade) {
         this.wineFacade = wineFacade;
     }
@@ -112,7 +152,7 @@ public class MenuController implements Serializable {
 //    }
 //    
      public String winPhotoStoragePath() {
-        return Constants.RELATIVE_STORAGE_PATH;
+        return Constants.ABSOLUTE_STORAGE_PATH;
     }
     
     public List<WineCollection> getWineCollection() {
@@ -130,6 +170,14 @@ public class MenuController implements Serializable {
         System.out.println(wineCollection);
         
          
+    }
+    
+    public void showFoodMenu(){
+        getFoodMenu();
+        foodMenu = new ArrayList<>();
+        System.out.println("inside foodmenu");
+        foodMenu = foodFacade.findAllFood();
+        System.out.println(foodMenu.size());
     }
     
     
