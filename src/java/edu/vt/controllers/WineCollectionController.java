@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -37,6 +38,15 @@ public class WineCollectionController implements Serializable {
     private List<WineCollection> searchItems = null;
     // searchField refers to Wine Name or All
     private String searchField;
+    private List<WineCollection> wineCollection = null;
+
+    public List<WineCollection> getWineCollection() {
+        return wineCollection;
+    }
+
+    public void setWineCollection(List<WineCollection> wineCollection) {
+        this.wineCollection = wineCollection;
+    }
 
     // searchString contains the character string the user entered for searching the selected searchField
     private String searchString;
@@ -178,6 +188,35 @@ public class WineCollectionController implements Serializable {
             setWineFileUploaded(false);
         }
     }
+    public void destroyWine() {
+        
+        
+        System.out.println("inside delete wine");
+        Methods.preserveMessages();
+
+        try {
+            // Obtain the company logo file URI
+            String companyLogoFileURI = Constants.ABSOLUTE_STORAGE_PATH + getSelected().getWineName() + ".png";
+
+            // Obtain a Path object by converting the company logo file URI
+            Path fileToDeletePath = Paths.get(companyLogoFileURI);
+
+            // Delete the file under the Path object if it exists
+            Files.deleteIfExists(fileToDeletePath);
+
+        } catch (IOException ex) {
+            Methods.showMessage("Fatal Error", "Something went wrong during wine image deletion!",
+                    "See: " + ex.getMessage());
+        }
+
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("WineCollectionDeleted"));
+
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+            //setWineFileUploaded(false);
+        }
+    }
 
     public List<WineCollection> getItems() {
         if (items == null) {
@@ -185,6 +224,15 @@ public class WineCollectionController implements Serializable {
         }
         return items;
     }
+      public void showWineCollection(){
+        getWineCollection();
+        wineCollection = new ArrayList<>();
+        wineCollection = wineFacade.findAllWines();
+        System.out.println(wineCollection);
+        
+         
+    }
+    
 
     public String getSearchField() {
         return searchField;
