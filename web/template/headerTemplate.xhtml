@@ -54,7 +54,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                     <p:menuitem outcome="/menuPages/FoodMenu"  value="Food"/>
                             </p:submenu>
                            <p:separator id="customSeparator1" style="width:55px;clear: none;" />
-                           <p:menuitem value="About" url="http://blacksburgwinelab.com?faces-redirect=true" target="_blank" icon='fas fa-info-circle'/> 
+                           <p:menuitem value="About" outcome="/contactPages/AboutUs" target="_blank" icon='fas fa-info-circle'/> 
                            <p:separator id="customSeparator2" style="width:55px;clear: none;" />
                            <c:if test="#{userController.isLoggedIn() == false}">  
                            <p:menuitem value="Book a Table" outcome="/SignIn" icon='fas fa-utensils-alt' />
@@ -73,7 +73,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                            <p:separator id="customSeparator3" style="width:55px;clear: none;" />
                            <p:menuitem value="Contact Us" outcome="/Contact Us" icon='fas fa-phone-square' />
                            <p:separator id="customSeparator4"  style="width:55px;clear: none;" />
-                           <p:menuitem value="Events this Week" url="#" icon='fas fa-calendar' />
+                           <p:menuitem value="Events this Week" outcome="/contactPages/EventsThisWeek" icon='fas fa-calendar' />
                            <p:separator id="customSeparator5" style="width:55px;clear: none;" />
                             
                          <c:choose>
