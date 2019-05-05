@@ -43,8 +43,14 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
                                      
+                                     <p:commandLink update=":WineForm:wineCollectionDetail" oncomplete="PF('wineDialog').show()" title="View Detail" style="width:500px">
+                                   
+                                     
                                      <h:outputText styleClass="fas fa-info-circle fa-2x" style="margin:0 auto; align-self: flex-end" />
                                              
+                                   <f:setPropertyActionListener value="#{wines}" target="#{wineCollectionController.selected}" />
+                                                 
+                                 </p:commandLink>
                                </td>                                
                                 
                          </tr>
@@ -59,7 +65,70 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                 </p:dataGrid>
                        
            
+      
+     
+   
+             <p:dialog header="Wine Details" id="wineCollectionDetail" widgetVar="wineDialog" modal="true" style="text-align:center"
+                          showEffect="slide" resizable="false"  width="500" height="500">
              
+                     
+                      <img src="C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Wines/#{menuController.selected.wineName}.png"
+                                   style="width:150px; height: 150px"          />
+                     
+                           <br/> <br/>
+                           
+                           <p>#{wineCollectionController.selected.wineName}</p>
+                         
+                           <p>$#{wineCollectionController.selected.glassprice} per glass/$#{wineCollectionController.selected.bottleprice} per bottle"</p>
+
+                    <table  style="align-items: center;border-spacing: 0px;" align="center" >
+                      <tr>
+                          <td style="width:400px ;height:30px; background-color: #c0c0c0; " align="center">
+                              <p>Country:</p> </td>
+                      </tr>
+                        
+                       <!--<br /><br />-->
+                       <tr>
+                       <td style="height:30px; width:400px; background-color:white " align="center">
+                           <p> #{wineCollectionController.selected.country}</p>
+                           </td></tr>
+                       <!--<br /><br />-->
+                       <tr><td style="width:400px ;height:30px; background-color: #c0c0c0" align="center">
+                               <p style="color: blue"> Description:</p>
+                           </td></tr>
+                       <tr>
+                           <td style="height:200px; width:400px; background-color:white " align="center">
+                               <p> #{wineCollectionController.selected.description}</p>
+                           </td>
+                       
+                       </tr>
+                       <!--<br /><br />-->
+                      
+                       </table>
+                        <!-- CLOSE button -->
+                        <c:choose>
+                            <c:when test="#{userController.isAdministrator()==true}">
+                                  <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
+                                                 actionListener="#{wineCollectionController.destroyWine()}" 
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                                 disabled="#{empty wineCollectionController.selected}">
+
+                                    <p:confirm header="Confirmation" 
+                                               message="Are you sure you want to permanently delete the selected wine #{wineCollectionController.selected.wineName} from the database?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                                </p:commandButton>
+                            </c:when>
+                        </c:choose>
+                            
+                        
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('wineDialog').hide()" icon="fas fa-window-close"/>
+                    
+          <!--  </h:panelGrid> -->
+                                 
+       <!-- </p:outputPanel>  -->
+       
+    </p:dialog>
+        
             </h:form> 
      
             </div>   
