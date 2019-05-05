@@ -106,19 +106,7 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                       
                        </table>
                         <!-- CLOSE button -->
-                        <c:choose>
-                            <c:when test="#{userController.isAdministrator()==true}">
-                                  <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
-                                                 actionListener="#{wineCollectionController.destroyWine()}" 
-                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
-                                                 disabled="#{empty wineCollectionController.selected}">
-
-                                    <p:confirm header="Confirmation" 
-                                               message="Are you sure you want to permanently delete the selected wine #{wineCollectionController.selected.wineName} from the database?" 
-                                               icon="fas fa-exclamation-triangle fa-2x" />
-                                </p:commandButton>
-                            </c:when>
-                        </c:choose>
+                      
                             
                         
                         <p:commandButton value="#{bundle.Close}" onclick="PF('wineDialog').hide()" icon="fas fa-window-close"/>
