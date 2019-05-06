@@ -29,7 +29,7 @@ public class SliderController {
 
         sliderImages = new ArrayList<>();
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 12; i++) {
             sliderImages.add("photo" + i + ".png");
         }
     }
@@ -62,6 +62,35 @@ public class SliderController {
             case "photo3.png":
                 imageDescription = "Amazon Web Services";
                 break;
+            case "photo4.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo5.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo6.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo7.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo8.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo9.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo10.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                case "photo11.png":
+                imageDescription = "Amazon Web Services";
+                break;
+                 case "photo12.png":
+                imageDescription = "Amazon Web Services";
+                break;
+              
+              
 
         }
 
