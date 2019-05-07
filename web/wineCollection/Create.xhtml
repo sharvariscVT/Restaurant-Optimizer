@@ -1,83 +1,178 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Created by Osman Balci on 2018.06.18
+Copyright © 2018 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition>
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
 
-        <p:dialog id="WineCollectionCreateDlg" widgetVar="WineCollectionCreateDialog" modal="true" resizable="false"
-                  appendTo="@(body)" header="#{bundle.CreateWineCollectionTitle}">
-            
-            <h:form id="WineCollectionCreateForm" class="ui-datatable-data">
-                
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
-                                 rendered="#{wineCollectionController.selected != null}">
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{wineCollectionController.selected.id}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_id}" required="true" 
-                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_id}"/>
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_wineName}" for="wineName" />
-                        <p:inputText id="wineName" value="#{wineCollectionController.selected.wineName}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_wineName}" required="true"
-                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_wineName}"/>
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_yearofManufacture}" for="yearofManufacture" />
-                        <p:inputText id="yearofManufacture" value="#{wineCollectionController.selected.yearofManufacture}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_yearofManufacture}" />
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_country}" for="country" />
-                        <p:inputText id="country" value="#{wineCollectionController.selected.country}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_country}" />
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{wineCollectionController.selected.description}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_description}" />
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_glassprice}" for="glassprice" />
-                        <p:inputText id="glassprice" value="#{wineCollectionController.selected.glassprice}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_glassprice}" />
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_bottleprice}" for="bottleprice" />
-                        <p:inputText id="bottleprice" value="#{wineCollectionController.selected.bottleprice}" 
-                                     title="#{bundle.CreateWineCollectionTitle_bottleprice}" required="true" class="inputTextField"
-                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_bottleprice}"/>
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_winetype}" for="winetype" />
-                        <p:inputText id="winetype" value="#{wineCollectionController.selected.winetype}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_winetype}" required="true" 
-                                     requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_winetype}"/>
-                        
-                        <p:outputLabel value="#{bundle.CreateWineCollectionLabel_isAvailable} (1/0)" for="isAvailable" />
-                        <p:inputText id="isAvailable" value="#{wineCollectionController.selected.isAvailable}" class="inputTextField"
-                                     title="#{bundle.CreateWineCollectionTitle_isAvailable}" />
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Create"></h:outputText>
+        </ui:define>
 
-                    </p:panelGrid>
-                    
-                </h:panelGroup>
-                   
-                <h:panelGroup>
-                    
-                    <div align="center">
-                        <!-- SAVE button -->
-                        <p:commandButton actionListener="#{wineCollectionController.create}" value="#{bundle.Create}" 
-                                         icon="fas fa-plus" ajax="false"
-                                         update=":display,:WineCollectionListForm,:datalist,:growl" 
-                                         oncomplete="handleSubmit(args,'WineCollectionCreateDialog');"/>
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:97%">
+       
+                <h1>Create a New Wine</h1>
+                <br />
+                <h:form id="wineCreateForm" class="ui-datatable-data">
+
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" >
+
+                            <!--
+                            When the user clicks the CREATE button in List.xhtml, actionListener="#{companyController.prepareCreate}" 
+                            executes the prepareCreate method in which a new Company object is instantiated and its object reference
+                            is stored in the "selected" instance variable. Thus, "selected" points to a newly created Company object
+                            with property (instance variable) values set to empty or null. The inputText data fields below are 
+                            intended to assign user-provided values to the properties.
+                            -->
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_wineName}" for="name" />
+                            <!-- The entered value is set to be the selected new company object's property 'name'  -->
+                            <p:inputText id="name" class="dataFields" value="#{wineCollectionController.selected.wineName}" 
+                                         placeholder="Enter Wine Name" required="true" 
+                                         requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_wineName}"/>
+
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_yearofManufacture}" for="yom" />
+                            <!-- The entered value is set to be the selected new company object's property 'exchange'  -->
+                            <p:inputText id="yom" class="dataFields" value="#{wineCollectionController.selected.yearofManufacture}" 
+                                         placeholder="Enter Year of Manufacture" >
+                                <f:validator validatorId="yearofManufactureValidator"/>
+                            </p:inputText>
+                                     
+
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_country}" for="country" />
+                            <!-- The entered value is set to be the selected new company object's property 'ticker'  -->
+                            <p:inputText id="country" class="dataFields" value="#{wineCollectionController.selected.country}" 
+                                         placeholder="Enter Country of Origin "            />
+
+                             
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_description}" for="description" />
+                           
+                            <p:inputText id="description" class="dataFields" value="#{wineCollectionController.selected.description}" 
+                                         placeholder="Enter Description of the wine"
+                                          />
+                                
+                        
+
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_glassprice}" for="glassPrice" />
+                           
+                        
+                             <p:inputText id="glassPrice" class="dataFields" value="#{wineCollectionController.selected.glassprice}" 
+                                         placeholder="Enter Price Per Glass"
+                                          />
+
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_bottleprice}" for="bottleprice" />
+                            <!-- The entered value is set to be the selected new company object's property 'sector'  -->
+                            <p:inputText id="bottleprice" class="dataFields" value="#{wineCollectionController.selected.bottleprice}" 
+                                         placeholder="Enter Price Per Bottle" required="true" 
+                                         requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_bottleprice}"/>
+
+                          
+                            <p:outputLabel value="#{bundle.CreateWineCollectionLabel_winetype}" for="wineType" />
+                            <!-- The entered value is set to be the selected new company object's property 'sector'  -->
+                            <p:inputText id="wineType" class="dataFields" value="#{wineCollectionController.selected.winetype}" 
+                                         placeholder="Enter Type of the Wine" required="true" 
+                                         requiredMessage="#{bundle.CreateWineCollectionRequiredMessage_winetype}"/>
+                           
+                          
+                            <p:outputLabel value="Wine Image: " class="facetHeader" />
+                            <h:graphicImage value="#{wineCollectionController.winePhotoStoragePath()}#{wineCollectionController.selected.wineName}.png" 
+                                            class="companyLogo" />
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                    <br /><br />
+                    <h:panelGroup>
+                        <!-- 
+                        ===============================
+                        |   UPLOAD LOGO FILE Button   |
+                        ===============================
+                        
+                        <p:commandButton> renders a Submit action and therefore it must be specified within <h:form>.
+                        
+                        Asynchronous JavaScript and XML (AJAX):
+                            When <p:commandButton> Submits an asynchronous request from the client to the server, 
+                            the server sends back a response that is used to update the JSF page. 
+                            The term AJAX refers to this interaction between the client and server.
+
+                        The "ajax" attribute of <p:commandButton> specifies the Submit mode: 
+                            ajax="true" (default) 
+                                causes the Submit to be made with Ajax. This means that the server 
+                                will send back a response that is used to update this JSF page.
+
+                            ajax="false" causes the Submit to be made without Ajax. This means that the server 
+                                will NOT send back a response that is used to update this JSF page.
+                        
+                        The ajax="false" attribute causes the current page to be first rendered before showing the UploadFile page.
+                        
+                        During the rendering, each <p:inputText> data field with required="true" is tested if a value is entered.
+                        If a value is not entered, the requiredMessage attribute value of <p:inputText> is displayed as an error message.
+                        If all fields pass the required="true" test, then the UploadFile page is displayed.
+                        
+                        If we want the <p:commandButton> to perform its 'action' or 'actionListener' immediately
+                        without first rendering the current JSF page, we use the attribute immediate="true".
+                        -->
+                        <p:commandButton value="Upload Wine File" action="/UploadFile?faces-redirect=true" 
+                                         icon="fas fa-upload" ajax="false"  />
                         &nbsp;
-                        <!-- CANCEL button -->
-                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('WineCollectionCreateDialog').hide()" 
-                                         immediate="true" icon="fas fa-ban"/>
-                    </div>
+                        <!-- 
+                        ===================
+                        |   SAVE Button   |
+                        ===================
+                        
+                        The SAVE button becomes enabled AFTER company logo file is uploaded.
+                        The logo file can be uploaded only if the user entered values in all data fields.
+                        -->
+                        <p:commandButton value="Save" action="/useAccount/AdminProfile" 
+                                         actionListener="#{wineCollectionController.create()}" 
+                                         icon="fas fa-save" ajax="false"  
+                                         disabled="#{wineCollectionController.isWineFileUploaded() == false}" />
+                        &nbsp;
 
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
+                        <!-- 
+                        =================================
+                        |   Conditional CANCEL Button   |
+                        =================================
+                        The CANCEL button looks the same but has 2 different functionalities.
+                        -->
+                        <c:if test="#{wineCollectionController.isWineFileUploaded() == false}">
+                            <!-- 
+                            Call the cancel() method immediately without first rendering this JSF page.
+                            The cancel() method will make the selected company object null and show the List page.
+                            -->
+                            <p:commandButton value="Cancel" action="#{wineCollectionController.cancel()}" 
+                                             icon="fas fa-ban" ajax="false" immediate="true" />
+                        </c:if>
+                        <c:if test="#{wineCollectionController.isWineFileUploaded() == true}">
+                            <!-- 
+                            Show the List page while executing the deleteLogoFile() method of the backing bean
+                            companyController to delete the uploaded company logo file since it is being cancelled. 
+                            --> 
+                            <p:commandButton value="Cancel" action="/useAccount/AdminProfile"
+                                             icon="fas fa-ban" ajax="false" 
+                                             actionListener="#{wineCollectionController.deleteWineFile()}" />
+                        </c:if>
 
+                    </h:panelGroup>
+
+                </h:form>
+
+      
+            </div>
+            <br /><br />
+        </ui:define>
     </ui:composition>
 </html>
