@@ -14,9 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" 
                                  rendered="#{foodMenuController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditFoodMenuLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{foodMenuController.selected.id}" title="#{bundle.EditFoodMenuTitle_id}"
-                                     required="true" requiredMessage="#{bundle.EditFoodMenuRequiredMessage_id}"/>
+                        
                         
                         <p:outputLabel value="#{bundle.EditFoodMenuLabel_name}" for="name" />
                         <p:inputText id="name" value="#{foodMenuController.selected.name}" title="#{bundle.EditFoodMenuTitle_name}" 
