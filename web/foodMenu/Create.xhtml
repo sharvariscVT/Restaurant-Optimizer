@@ -16,9 +16,6 @@
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
                                  rendered="#{foodMenuController.selected != null}">
                         
-                        <p:outputLabel value="#{bundle.CreateFoodMenuLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{foodMenuController.selected.id}" title="#{bundle.CreateFoodMenuTitle_id}"
-                                     required="true" requiredMessage="#{bundle.CreateFoodMenuRequiredMessage_id}"/>
                         
                         <p:outputLabel value="#{bundle.CreateFoodMenuLabel_name}" for="name" />
                         <p:inputText id="name" value="#{foodMenuController.selected.name}" title="#{bundle.CreateFoodMenuTitle_name}"
