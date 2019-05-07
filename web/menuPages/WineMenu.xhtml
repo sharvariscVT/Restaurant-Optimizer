@@ -24,24 +24,22 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
             <div align="center">
                  <h:form id="WineForm" class="ui-datatable-data" style="width:80%; ">
                      <p:dataGrid var="wines" value="#{menuController.wineCollection}" 
-                             paginator="true" layout="grid"  
-                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                             rowsPerPageTemplate="6,12,16" columns="1" rows="12">
+                             layout="grid"  
+                           columns="2" >
 
                     <p:panel><table style="width:95%; margin:0 auto; align-content: center">
                             <tr >
                     
-                             <td width="200px"><h:graphicImage value="/resources/images/Wines/#{wines.wineName}.png"
-                                            width="150px" height="200px"  /> </td>   
+                             <td width="100px"><h:graphicImage value="/resources/images/Wines/#{wines.wineName}.png"
+                                            width="auto" height="300px"  /> </td>   
                                 
-                             <td width="400px" align="center"><table><tr><td>#{wines.wineName}</td></tr>
+                                <td  align="center"><table><tr><td align="center" width="200px" class="j">
+                                                <font size="3" color=" maroon" face="verdana" >#{wines.wineName}</font>
+                                            </td></tr>
                                      <tr><td></td></tr>
                                      <tr><td></td></tr></table></td>
-                             <td>
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                                <td align="right">
+                                 
                                      
                                      <p:commandLink update=":WineForm:wineCollectionDetail" oncomplete="PF('wineDialog').show()" title="View Detail" style="width:500px">
                                    
@@ -72,42 +70,34 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
                           showEffect="slide" resizable="false"  width="500" height="500">
              
                      
-                      <img src="C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Wines/#{menuController.selected.wineName}.png"
-                                   style="width:150px; height: 150px"          />
+                      <img src="C:/Users/ADMIN/Documents/NetBeansProjects/cloud_software_app_java_ee-master/web/resources/images/Wines/#{menuController.getCleanWineName(menuController.selected.wineName)}.png"
+                                   style="width:150px; height: 150px" class="scalableImage"         />
                      
                            <br/> <br/>
                            
-                           <p>#{wineCollectionController.selected.wineName}</p>
+                           <p><font size="5" face='Helvetica' color='maroon'>#{wineCollectionController.selected.wineName}</font></p>
                          
-                           <p>$#{wineCollectionController.selected.glassprice} per glass/$#{wineCollectionController.selected.bottleprice} per bottle"</p>
-
-                    <table  style="align-items: center;border-spacing: 0px;" align="center" >
-                      <tr>
-                          <td style="width:400px ;height:30px; background-color: maroon; " align="center">
-                              <p  style="color: White">Country:</p> </td>
-                      </tr>
+                           <p><font size="2">$#{wineCollectionController.selected.glassprice} per glass/$#{wineCollectionController.selected.bottleprice} per bottle</font></p>
+        
+                    <table  style="align-items: center;border-spacing: 0px; width:300px" align="center" >
                         
-                       <!--<br /><br />-->
+                        <tr ><td align="center" ><i class="fas fa-flag"  width="70px"></i>
+                                <font size="4" face="verdana">  Country: </font><font color='black' size='3'> #{wineCollectionController.selected.country}</font></td>
+                      </tr>
+                        <tr>&nbps; </tr>
+
+                        
                        <tr>
-                       <td style="height:30px; width:400px; background-color:white " align="center">
-                           <p> #{wineCollectionController.selected.country}</p>
-                           </td></tr>
-                       <!--<br /><br />-->
-                       <tr><td style="width:400px ;height:30px; background-color: maroon" align="center">
-                               <p style="color: White"> Description:</p>
-                           </td></tr>
-                       <tr>
-                           <td style="height:200px; width:400px; background-color:white " align="center">
-                               <p> #{wineCollectionController.selected.description}</p>
+                           <td style="  background-color:bisque " align="center">
+                               <p> <font face='Times New Roman'>#{wineCollectionController.selected.description}</font></p>
                            </td>
-                       
                        </tr>
-                       <!--<br /><br />-->
+                     
                       
-                       </table>
+                    </table>
                         <!-- CLOSE button -->
                       
-                            
+                  <br/><br/>          
                         
                         <p:commandButton value="#{bundle.Close}" onclick="PF('wineDialog').hide()" icon="fas fa-window-close"/>
                     
