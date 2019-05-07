@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -71,7 +72,15 @@ public class MenuController implements Serializable {
         this.wineCollectionController = wineCollectionController;
     }
 
+     private HashMap< String, List > map =null; 
 
+    public HashMap<String, List> getMap() {
+        return map;
+    }
+
+    public void setMap(HashMap<String, List> map) {
+        this.map = map;
+    }
 
     public WineCollection getSelected() {
         return selected;
@@ -178,6 +187,36 @@ public class MenuController implements Serializable {
         System.out.println("inside foodmenu");
         foodMenu = foodFacade.findAllFood();
         System.out.println(foodMenu.size());
+    }
+    
+    public void showFoodMenuWithType(){
+        showFoodMenu();
+        getMap();
+        map = new HashMap<>();
+       for(FoodMenu a:foodMenu ){
+           if(!map.containsKey(a.getFoodType())){
+               List temp = new ArrayList<>();
+               temp.add(a);
+               map.put(a.getFoodType(), temp);
+               System.out.println(a.getFoodType()+"(key unavailable):"+a.getName());
+               
+           }
+           else if(map.containsKey(a.getFoodType())){
+               map.get(a.getFoodType()).add(a);
+             System.out.println(a.getFoodType()+"(key Available):"+a.getName());
+                       
+           }
+               
+       }
+       
+       System.out.println("inside clean food list fn "+map);
+        
+    }
+    public String getCleanWineName(String name){
+        
+        String name2= name.replaceAll("\\s","");
+        
+        return name2;
     }
     
     
