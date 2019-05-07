@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/template/siteTemplate.xhtml">
 
@@ -30,55 +31,62 @@
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
                        
-                        <p:column headerText="#{bundle.CreateWineCollectionTitle_id}" style="align-content: center; width:10px ">
+                        <p:column headerText="#{bundle.CreateWineCollectionTitle_id}" style="align-content: center; width:5% ">
                             <h:outputText value="#{item.id}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
-                         
-                        <p:column headerText="Photo" style="align-content: center; width:60px;">
-                                 <img src="/resources/images/Wines/#{item.wineName}.png" 
+<!--                         
+                        <p:column headerText="Photo" style="align-content: center; width:10%;">
+                            <img src="/resources/images/Wines/#{item.id}.png" 
                                      alt="Wine Photo" width="40" class="recipeImageCenter"/>
-                         </p:column>
+                         </p:column>-->
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_wineName}" style="align-content: center;" >
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_wineName}" style="align-content: flex-start !important; width:10%" >
                            
                             <h:outputText value="#{item.wineName}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_yearofManufacture}" style="align-content: center;"  >
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_yearofManufacture}" style="align-content: flex-start; width:7%"  >
                             <h:outputText value="#{item.yearofManufacture}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_country}" style="align-content: center;" >
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_country}" style="align-content: flex-start; width:10%" >
                          
                             <h:outputText value="#{item.country}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_description}" style="align-content: center;" >
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_description}" style="align-content: center; width:20%" >
                          
                             <h:outputText value="#{item.description}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_glassprice}" style="align-content: center; width:60px">
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_glassprice}" style="align-content: center; width:5%">
                             <h:outputText value="$#{item.glassprice}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_bottleprice}" style="align-content: center; width:60px">
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_bottleprice}" style="align-content: center; width:5%">
                            
                             <h:outputText value="#{item.bottleprice}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
                         
-                        <p:column headerText="#{bundle.ListWineCollectionTitle_winetype}" style="align-content: center;" >
+                        <p:column headerText="#{bundle.ListWineCollectionTitle_winetype}" style="align-content: center; width:10%" >
                     
                             <h:outputText value="#{item.winetype}"  class="inputTextField" style="align-content: center"/>
                         </p:column>
 
                         
                         <p:column headerText="#{bundle.ListWineCollectionTitle_isAvailable}" style="width:60px; align-content: center">
-                            <h:outputText value="#{item.isAvailable}"  class="inputTextField" style="align-content: center"/>
+                            <c:choose >
+                                <c:when test="#{item.isAvailable} == 0">
+                                    <h:outputText value="No"  class="inputTextField" style="align-content: center"/>
+                                </c:when>
+                                <c:otherwise>
+                                      <h:outputText value="Yes"  class="inputTextField" style="align-content: center"/>
+                                </c:otherwise>
+                            </c:choose>
                         </p:column>
                         <br/>
                         
@@ -86,7 +94,9 @@
                         <f:facet name="footer">
                           <p:commandButton id="createButton" icon="fas fa-plus" value="#{bundle.Create}" 
                                                  actionListener="#{wineCollectionController.prepareCreate}" 
-                                                 update=":WineCollectionCreateForm" oncomplete="PF('WineCollectionCreateDialog').show()"/>
+                                                 action="/wineCollection/Create?faces-redirect=true" />
+                          
+                          
                             
                          <p:commandButton id="viewButton" icon="fas fa-eye" value="#{bundle.View}" 
                                                  update=":WineCollectionViewDlg" oncomplete="PF('WineCollectionViewDialog').show()" 
@@ -121,7 +131,7 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
+          
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
              </div>
