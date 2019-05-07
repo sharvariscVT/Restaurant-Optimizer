@@ -57,4 +57,43 @@ public class UserFacade extends AbstractFacade<User> {
     
     
        }
+    
+    public List<Subscribers> findAllSubscribers() {  
+           List<Subscribers> subs =em.createNamedQuery("Subscribers.findAll")
+        //    .setParameter("primaryKey", dbPrimaryKey)
+            .getResultList();
+    //   System.out.println("--;;;;;;----"+users);
+        return subs;
+    
+    
+       }
+      
+    
+      public void createSubscriberEntry(User forUser) {
+        int user_id = forUser.getId();
+        String email = forUser.getEmail();
+        
+        em.createNativeQuery("INSERT INTO Subscribers (id, email) VALUES (?, ?)")
+            .setParameter(1, user_id)
+            .setParameter(2, email)
+            .executeUpdate();
+    }
+      public void removeSubscriberEntry(User forUser) {
+        int user_id = forUser.getId();
+        String email = forUser.getEmail();
+        
+        em.createNativeQuery("DELETE FROM Subscribers WHERE id=?")
+            .setParameter(1, user_id)
+            .executeUpdate();
+    }
+      
+      public boolean findSubscriber(String email) {
+        if (em.createQuery("SELECT c FROM Subscribers c WHERE c.email = :userEmail")
+                .setParameter("userEmail", email)
+                .getResultList().isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+      }
 }
