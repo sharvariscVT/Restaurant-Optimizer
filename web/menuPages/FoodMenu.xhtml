@@ -23,29 +23,169 @@ Copyright © 2018 Sharvari Chougule. All rights reserved.
         <ui:define name="editableContent">
             <div align="center">
                  <h:form id="FoodForm" class="ui-datatable-data" style="width:70%; ">
-                     <p:dataGrid var="food" value="#{menuController.foodMenu}" 
-                             paginator="true" layout="grid"  
-                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                             rowsPerPageTemplate="6,12,16" columns="1" rows="12">
-                    <p:panel><table style="width:95%; margin:0 auto; align-content: center">
+                     
+              <p:accordionPanel multiple="true">         
+                  <p:tab title="Starters">  
+                   
+                      <p:dataGrid var="food"   layout="grid"  
+                              columns="3" 
+                              value="#{menuController.map.get('Starter')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
                             <tr >
                                    
-                                <td width="300px" align="center"><table><tr><td>#{food.name}</td></tr>
-                                     <tr><td></td></tr>
-                                     <tr><td></td></tr></table></td>
-                                <td width="300px">
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
                                  #{food.description}          
                                   
                                </td>
-                                <td width="100px">
-                                    $ #{food.price}
-                                </td>
+                               </tr> 
                                 
-                         </tr>
+                     
                      </table>
                      
-                    </p:panel>   
-                </p:dataGrid>
+                        </p:panel>   
+                     </p:dataGrid>
+                          
+                  </p:tab>
+                  
+                   <p:tab title="Tinned Seafood">  
+                     
+                      <p:dataGrid var="food"  layout="grid"  
+                                columns="3" 
+                              value="#{menuController.map.get('Tinned Seafood')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
+                            <tr >
+                                   
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
+                                 #{food.description}          
+                                  
+                               </td>
+                               </tr> 
+                                
+                     
+                     </table>
+                     
+                        </p:panel>   
+                     </p:dataGrid>
+                          
+                  </p:tab>
+                  
+                     
+                   <p:tab title="Sandwiches and Salads">  
+                    <p:dataGrid var="food"  layout="grid"  
+                             columns="3" 
+                              value="#{menuController.map.get('Sandwiches and Salads')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
+                            <tr >
+                                   
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
+                                 #{food.description}          
+                                  
+                               </td>
+                               </tr> 
+                                
+                     
+                     </table>
+                     
+                        </p:panel>   
+                     </p:dataGrid>
+                  </p:tab>
+                       
+                      
+                 <p:tab title="Desserts">  
+                           <p:dataGrid var="food"  layout="grid"  
+                                  columns="3"
+                              value="#{menuController.map.get('Desserts')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
+                            <tr >
+                                   
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
+                                 #{food.description}          
+                                  
+                               </td>
+                               </tr> 
+                                
+                     
+                     </table>
+                     
+                        </p:panel>   
+                     </p:dataGrid>
+                  </p:tab>
+                  
+                  
+               <p:tab title="Featured Cheeses"> 
+                   
+                            <p:dataGrid var="food"  layout="grid"  
+                                  columns="3"
+                              value="#{menuController.map.get('Featured Cheeses')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
+                            <tr >
+                                   
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
+                                 #{food.description}          
+                                  
+                               </td>
+                               </tr> 
+                                
+                     
+                     </table>
+                     
+                        </p:panel>   
+                     </p:dataGrid>
+                   
+                  </p:tab>
+                       
+                  
+                   <p:tab title="Featured Meats">  
+                      <p:dataGrid var="food"  layout="grid"  
+                               columns="3" 
+                              value="#{menuController.map.get('Featured Meats')}" >
+                    <p:panel style="height:70px; border:none" ><table style="width:300px; margin:0 auto; align-content: center; height: 50px">
+                            <tr >
+                                   
+                                <td width="300px" align="left"><font size="4" color="maroon" face="verdana">#{food.name}</font></td>
+                                <td>&nbsp;</td>
+                                <td align="right" width="50px">$ #{food.price}</td>
+                            </tr>
+                            
+                            <tr> <td width="300px" align="left">
+                                 #{food.description}          
+                                  
+                               </td>
+                               </tr> 
+                                
+                     
+                     </table>
+                     
+                        </p:panel>   
+                     </p:dataGrid>
+                  </p:tab>
+                  
+                  </p:accordionPanel>
               </h:form> 
      
             </div>   
