@@ -362,7 +362,42 @@ public class UserController implements Serializable {
          */
         return Methods.sessionMap().get("username") != null;
     }
-
+    
+    private boolean clicked = false;
+    
+    public boolean isUserSubscribed() {
+        /*
+        The username of a signed-in user is put into the SessionMap in the
+        initializeSessionMap() method in LoginManager upon user's sign in.
+        If there is a username, that means, there is a signed-in user.
+         */
+        User loggedInUser = (User) Methods.sessionMap().get("user");
+        System.out.println("log email: " + loggedInUser.getEmail());
+        boolean isUserSubscribed = getUserFacade().findSubscriber(loggedInUser.getEmail());
+        System.out.println("isUserSubscribed: " + isUserSubscribed);
+        if(isUserSubscribed) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void joinList() {
+        User loggedInUser = (User) Methods.sessionMap().get("user");
+        boolean isUserSubscribed = getUserFacade().findSubscriber(loggedInUser.getEmail());
+        
+        if(!isUserSubscribed) {
+            getUserFacade().createSubscriberEntry(loggedInUser);
+        }
+    }
+    
+    public void leaveList() {
+        User loggedInUser = (User) Methods.sessionMap().get("user");
+        boolean isUserSubscribed = getUserFacade().findSubscriber(loggedInUser.getEmail());
+        if(isUserSubscribed) {
+            getUserFacade().removeSubscriberEntry(loggedInUser);
+        }
+    }
     /*
     **************************************
     Return List of U.S. State Postal Codes
