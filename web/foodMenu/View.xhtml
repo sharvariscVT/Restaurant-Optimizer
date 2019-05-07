@@ -14,7 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" 
                                  rendered="#{foodMenuController.selected != null}">
-                        <h:outputText value="#{bundle.ViewFoodMenuLabel_id}"/>
+                        <h:outputText value="#{bundle.ViewFoodMenuLabel_id}" />
                         <h:outputText value="#{foodMenuController.selected.id}" title="#{bundle.ViewFoodMenuTitle_id}"/>
                         <h:outputText value="#{bundle.ViewFoodMenuLabel_name}"/>
                         <h:outputText value="#{foodMenuController.selected.name}" title="#{bundle.ViewFoodMenuTitle_name}"/>
