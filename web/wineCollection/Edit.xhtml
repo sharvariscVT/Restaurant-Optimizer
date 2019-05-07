@@ -16,12 +16,7 @@
                     
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
                                  rendered="#{wineCollectionController.selected != null}">
-                        
-                        <p:outputLabel value="#{bundle.EditWineCollectionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{wineCollectionController.selected.id}" 
-                                     title="#{bundle.EditWineCollectionTitle_id}" required="true" 
-                                     requiredMessage="#{bundle.EditWineCollectionRequiredMessage_id}"/>
-                        
+                       
                         <p:outputLabel value="#{bundle.EditWineCollectionLabel_wineName}" for="wineName" />
                         <p:inputText id="wineName" value="#{wineCollectionController.selected.wineName}" 
                                      title="#{bundle.EditWineCollectionTitle_wineName}" required="true"
