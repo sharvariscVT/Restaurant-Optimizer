@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS Suggestions;
 CREATE TABLE Suggestions
 (
     suggestion VARCHAR(1024) NOT NULL,
-    PRIMARY KEY (suggestion
+    PRIMARY KEY (suggestion)
 );
 
 DROP TABLE IF EXISTS TableBooking;
@@ -75,20 +75,30 @@ CREATE TABLE TableBooking
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS WineCollection, User, UserPhoto, Subscribers;
+DROP TABLE IF EXISTS Subscribers;
+
+CREATE TABLE Subscribers
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(128) NOT NULL,      
+    PRIMARY KEY (id)
+);
+
+
+DROP TABLE IF EXISTS WineCollection;
 
 CREATE TABLE WineCollection
 (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    WineName VARCHAR(32) NOT NULL,
-    YearofManufacture VARCHAR(4),
-    Country VARCHAR(32),
-    Description VARCHAR(300),
-    Glass_price float(10) ,
-    Bottle_price float(10) Not null,
-    Wine_type VARCHAR(10) not null,
-    isAvailable TINYINT(1) default 1;
-    PRIMARY KEY (id)
+ id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+ WineName VARCHAR(64) NOT NULL,
+ YearofManufacture VARCHAR(4),
+ Country VARCHAR(32),
+ Description VARCHAR(512),
+ Glass_price float(10) ,
+ Bottle_price float(10) Not null,
+ Wine_type VARCHAR(10) not null,
+ isAvailable TINYINT(1) default 1,
+ PRIMARY KEY (id)
 );
 
 
@@ -130,6 +140,9 @@ INSERT into WineCollection(WineName,YearofManufacture,Country,Description,Glass_
 ('Mollydooker', '2017', 'Australia', ' This extracted Shiraz is unabashedly in-your-face. The aroma is full of spiced plums, blackberry jam and black cherry. Flavors of licorice, vanilla and dark berries combined with hints of coffee and chocolate on the finish. Rich, tannic, and full-bodied, it’s a wine you won’t forget anytime soon.',22,66,'Red');
 
 
+
+DROP TABLE IF EXISTS User;
+
 CREATE TABLE User
 (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -149,17 +162,13 @@ CREATE TABLE User
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Subscribers
-(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    email VARCHAR(128) NOT NULL,      
-    PRIMARY KEY (id)
-);
+
+DROP TABLE IF EXISTS UserPhoto;
 
 CREATE TABLE UserPhoto
 (
-   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-   extension ENUM('jpeg', 'jpg', 'png', 'gif') NOT NULL,
-   user_id INT UNSIGNED,
-   FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+       id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+       extension ENUM('jpeg', 'jpg', 'png', 'gif') NOT NULL,
+       user_id INT UNSIGNED,
+       FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
