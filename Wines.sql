@@ -13,6 +13,7 @@ CREATE TABLE WineCollection
  Glass_price float(10) ,
  Bottle_price float(10) Not null,
  Wine_type VARCHAR(10) not null,
+ isAvailable TINYINT(1) default 1;
   PRIMARY KEY (id)
 );
 
